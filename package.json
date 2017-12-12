@@ -1,0 +1,33 @@
+{
+  "name": "microstates-todomvc-model",
+  "version": "1.0.0",
+  "description": "Microstates Model for TodoMVC Component",
+  "main": "nodules.js",
+  "module": "index.js",
+  "scripts": {
+    "test": "mocha --require babel-core/register tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/microstates/microstates-todomvc-model.git"
+  },
+  "keywords": ["microstates", "todomvc"],
+  "author": "Taras Mankovski <taras@thisdot.co>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/microstates/microstates-todomvc-model/issues"
+  },
+  "homepage": "https://github.com/microstates/microstates-todomvc-model#readme",
+  "dependencies": {
+    "@std/esm": "0.18.0",
+    "microstates": "0.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "chai": "4.1.2",
+    "mocha": "4.0.1"
+  }
+}
