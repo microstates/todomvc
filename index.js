@@ -32,11 +32,20 @@ export default class TodoMVC {
    * In Redux world, this would be similar to Reselect except Microstates doesn't currently support memoization.
    * We're planning to apply several levels of memoization in the future.
    */
+
+  /**
+   * Number completed items
+   * @type Number
+   */
   get completedCount() {
     // in computed properties, `this` references state object which has composed state values on it.
     return this.todos.filter(({ completed }) => completed).length
   }
 
+  /**
+   * Next id in order
+   * @type Number
+   */
   get nextId() {
     return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1
   }
@@ -53,6 +62,11 @@ export default class TodoMVC {
    * 3. context object is a microstate constructor for performing batched transitions on the microstate's state
    */
 
+  /**
+   * Change the status of a todo item to be completed
+   * @param {TodoMVC} current state
+   * @param {Object} todo
+   */
   completeTodo(current, todo) {
     /**
      * microstates doesn't support transitioning state that is composed into an array (yet).
@@ -67,6 +81,12 @@ export default class TodoMVC {
     })
   }
 
+  /**
+   * Change the text of a todo item
+   * @param {TodoMVC} current
+   * @param {Object} todo
+   * @param {String} text
+   */
   editTodo(current, todo, text) {
     // Find the todo that we want to update and replace it with new item with changed text.
     return this().todos.replace(todo, {
@@ -75,11 +95,21 @@ export default class TodoMVC {
     })
   }
 
+  /**
+   * Remote a todo item from the list
+   * @param {TodoMVC} current
+   * @param {Object} todo
+   */
   deleteTodo(current, todo) {
     // Filter here is a transition on todos array.
     return this().todos.filter(item => item !== todo)
   }
 
+  /**
+   * Add a todo item to the list
+   * @param {TodoMVC} current
+   * @param {String} text
+   */
   addTodo(current, text) {
     // Push is transition on todos array.
     return this().todos.push({
@@ -89,6 +119,9 @@ export default class TodoMVC {
     })
   }
 
+  /**
+   * Remove all items that have completed status
+   */
   clearCompleted() {
     return this().todos.filter(({ completed }) => !completed)
   }
