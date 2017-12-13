@@ -1,9 +1,11 @@
 import * as MS from 'microstates'
 
 /**
- * TodoMVC is a Microstate type.
+ * TodoMVC is a Microstate model.
  *
- * A microstate is a value and type description. The type description is used to interpret the value
+ * This model provides state structure and transitions necessary to create build a functional TodoMVC app your own view layer.
+ *
+ * A Microstate model is a value and type description. The type description is used to interpret the value
  * and generate state and transitions for the value. The state will be bound to the template and rendered.
  * Transitions will be used to create actions that will transition the state and update the DOM tree.
  *
@@ -23,11 +25,10 @@ export default class TodoMVC {
   todos = MS.Array
 
   /**
-   * COMPUTED PROPERTIES (aka getters)
+   * Getters
    *
-   * Computed properties are applied to the state that's generated from a type. The context of the computed
-   * property is the state object. This gives developer access to composed states on this microstate. It can
-   * be used to derive values.
+   * Getters are applied to the state that's generated from a type. The context of a getter is the state object.
+   * This gives developer access to composed states on this microstate. It can be used to derive values.
    *
    * In Redux world, this would be similar to Reselect except Microstates doesn't currently support memoization.
    * We're planning to apply several levels of memoization in the future.
