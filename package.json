@@ -1,31 +1,26 @@
 {
-  "name": "microstates-todomvc-model",
+  "name": "microstates-todomvc",
   "version": "1.0.0-beta.1",
   "description": "Microstates Model for TodoMVC Component",
   "main": "./build/index.js",
   "module": "./build/index.js",
   "jsnext:main": "./build/index.js",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "scripts": {
     "test": "mocha --require babel-core/register tests.js",
     "build": "cross-env BABEL_ENV=es babel index.js --out-dir build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/microstates/microstates-todomvc-model.git"
+    "url": "git+https://github.com/microstates/todomvc.git"
   },
-  "keywords": [
-    "microstates",
-    "todomvc"
-  ],
+  "keywords": ["microstates", "todomvc"],
   "author": "Taras Mankovski <taras@thisdot.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/microstates/microstates-todomvc-model/issues"
+    "url": "https://github.com/microstates/todomvc/issues"
   },
-  "homepage": "https://github.com/microstates/microstates-todomvc-model#readme",
+  "homepage": "https://github.com/microstates/todomvc#readme",
   "dependencies": {
     "microstates": "0.3.0"
   },
