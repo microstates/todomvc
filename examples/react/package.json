@@ -13,7 +13,7 @@
     "hoist-non-react-statics": "2.3.1",
     "jest": "^21.2.1",
     "microstates": "0.3.0",
-    "microstates-todomvc-model": "1.0.0-beta.1",
+    "microstates-todomvc": "1.0.0-beta.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
