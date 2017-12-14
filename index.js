@@ -48,7 +48,11 @@ export default class TodoMVC {
    * @type Number
    */
   get nextId() {
-    return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1
+    return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0) + 1
+  }
+
+  get remainingCount() {
+    return this.todos.length - this.completedCount
   }
 
   /**

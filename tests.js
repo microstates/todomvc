@@ -9,40 +9,55 @@ const { freeze } = Object
 const { expect } = chai
 const { describe, it } = mocha
 
+let todoOne = freeze({ id: 1, text: 'Make initial commit', completed: false })
+let todoTwo = freeze({ id: 2, text: 'Write readme', completed: false })
+let todoThree = freeze({ id: 3, text: 'Release microstates', completed: false })
+let value = freeze({
+  todos: freeze([todoOne, todoTwo, todoThree]),
+})
+let empty = microstate(TodoMVC)
+let filled = microstate(TodoMVC, value)
+let someCompleted = microstate(TodoMVC, {
+  todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree],
+})
+
 describe('TodoMVC', function() {
-  describe('WITHOUT initial value', function() {
-    let ms = microstate(TodoMVC)
-    it('has todos array on state', function() {
-      expect(ms.state.todos).to.deep.equal([])
+  describe('state', function() {
+    describe('todos', function() {
+      it('is empty array when todos are not provided', function() {
+        expect(empty.state.todos).to.deep.equal([])
+      })
+      it('has todo items when filled', function() {
+        expect(filled.state.todos).to.deep.equal([todoOne, todoTwo, todoThree])
+      })
     })
-    it('has nextId on state', function() {
-      expect(ms.state.nextId).to.equal(0)
+    describe('completedCount', function() {
+      it('is empty when no todos are present', function() {
+        expect(empty.state.completedCount).to.equal(0)
+      })
+      it('is 1 when 1 item is complete', function() {
+        expect(someCompleted.state.completedCount).to.equal(1)
+      })
     })
-    it('has completedCount on state', function() {
-      expect(ms.state.completedCount).to.equal(0)
+    describe('nextId', function() {
+      it('is 1 when no todos are present', function() {
+        expect(empty.state.nextId).to.equal(1)
+      })
+      it('caclulates next id when todos are present', function() {
+        expect(filled.state.nextId).to.equal(4)
+      })
+    })
+    describe('remainingCount', function() {
+      it('is 0 when no todos are present', function() {
+        expect(empty.state.remainingCount).to.equal(0)
+      })
+      it('is 2 two when 1 out of 3 items are completed', function() {
+        expect(someCompleted.state.remainingCount).to.equal(2)
+      })
     })
   })
-  describe('FROM initial value', function() {
-    let ms = microstate(TodoMVC, {
-      todos: [{ text: 'Hello World', id: 1, completed: true }],
-    })
-    it('has one todo', function() {
-      expect(ms.state.todos).to.deep.equal([{ text: 'Hello World', id: 1, completed: true }])
-    })
-    it('has nextId on state', function() {
-      expect(ms.state.nextId).to.equal(2)
-    })
-    it('has completedCount on state', function() {
-      expect(ms.state.completedCount).to.equal(1)
-    })
-  })
+
   describe('transitions', function() {
-    let todoOne = freeze({ id: 1, text: 'Make initial commit', completed: false })
-    let todoTwo = freeze({ id: 2, text: 'Write readme', completed: false })
-    let todoThree = freeze({ id: 3, text: 'Release microstates', completed: false })
-    let value = freeze({
-      todos: freeze([todoOne, todoTwo, todoThree]),
-    })
     it('completes todo with completeTodo', function() {
       let { todos } = microstate(TodoMVC, value)
         .completeTodo(todoOne)
