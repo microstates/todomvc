@@ -77,6 +77,14 @@ describe('TodoMVC', function() {
         expect(ms.state.filteredTodos).to.deep.equal([todoOne, todoThree])
       })
     })
+    describe('hasTodos', function() {
+      it('is false when no todos are present', function() {
+        expect(empty.state.hasTodos).to.be.false
+      })
+      it('is true when todos are present', function() {
+        expect(filled.state.hasTodos).to.be.true
+      })
+    })
   })
 
   describe('transitions', function() {

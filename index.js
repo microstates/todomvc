@@ -78,6 +78,10 @@ export default class TodoMVC {
     }
   }
 
+  get hasTodos() {
+    return this.todos.length > 0
+  }
+
   /**
    * CUSTOM TRANSITIONS
    *
