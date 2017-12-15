@@ -1,5 +1,9 @@
 import * as MS from 'microstates'
 
+export const SHOW_ALL = ''
+export const SHOW_COMPLETED = 'show_completed'
+export const SHOW_ACTIVE = 'show_active'
+
 /**
  * TodoMVC is a Microstate model.
  *
@@ -23,6 +27,14 @@ export default class TodoMVC {
    * depth. Microstates will know how to transition that structure.
    */
   todos = MS.Array
+
+  filter = MS.String
+
+  FILTER_OPTIONS = {
+    [SHOW_ALL]: 'All',
+    [SHOW_ACTIVE]: 'Active',
+    [SHOW_COMPLETED]: 'Completed',
+  }
 
   /**
    * Getters
@@ -53,6 +65,17 @@ export default class TodoMVC {
 
   get remainingCount() {
     return this.todos.length - this.completedCount
+  }
+
+  get filteredTodos() {
+    switch (this.filter) {
+      case SHOW_ALL:
+        return this.todos
+      case SHOW_COMPLETED:
+        return this.todos.filter(({ completed }) => completed)
+      case SHOW_ACTIVE:
+        return this.todos.filter(({ completed }) => !completed)
+    }
   }
 
   /**

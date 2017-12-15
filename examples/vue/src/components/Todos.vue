@@ -33,8 +33,10 @@
 
 <script>
 import Vue from 'vue'
+import connect from '../utils/connect'
+import TodoMVC from 'microstate-todomvc'
 
-export default {
+export default connect(TodoMVC, {
   data() {
     return {
       todos: [],
@@ -106,7 +108,7 @@ export default {
       },
     },
   },
-}
+})
 </script>
 
 <style src="./todo.css"></style>

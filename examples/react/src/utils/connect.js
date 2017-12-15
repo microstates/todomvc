@@ -1,5 +1,5 @@
 import { Component, createElement } from 'react'
-import { map, append } from 'funcadelic'
+import { map } from 'funcadelic'
 import hoistStatics from 'hoist-non-react-statics'
 import microstate from 'microstates'
 
@@ -30,12 +30,10 @@ export default function connect(Model, WrappedComponent) {
     }
 
     render() {
-      return createElement(
-        WrappedComponent,
-        append(this.state, {
-          actions: this.actions,
-        })
-      )
+      return createElement(WrappedComponent, {
+        model: this.state,
+        actions: this.actions,
+      })
     }
   }
 

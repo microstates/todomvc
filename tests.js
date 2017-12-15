@@ -1,7 +1,7 @@
 import chai from 'chai'
 import mocha from 'mocha'
 
-import TodoMVC from './index'
+import TodoMVC, { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from './index'
 // Fix: why do I need to do this?
 const microstate = require('microstates').default
 
@@ -53,6 +53,28 @@ describe('TodoMVC', function() {
       })
       it('is 2 two when 1 out of 3 items are completed', function() {
         expect(someCompleted.state.remainingCount).to.equal(2)
+      })
+    })
+    describe('filteredTodos', function() {
+      let todos = [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree]
+      it('has all items when filter is not specified', function() {
+        expect(filled.state.filteredTodos).to.deep.equal([todoOne, todoTwo, todoThree])
+      })
+      it('has only completed when filter is SHOW_COMPLETED', function() {
+        let ms = microstate(TodoMVC, {
+          filter: SHOW_COMPLETED,
+          todos,
+        })
+        expect(ms.state.filteredTodos).to.deep.equal([
+          { id: 2, text: 'Write readme', completed: true },
+        ])
+      })
+      it('has only active when filter is SHOW_ACTIVE', function() {
+        let ms = microstate(TodoMVC, {
+          filter: SHOW_ACTIVE,
+          todos,
+        })
+        expect(ms.state.filteredTodos).to.deep.equal([todoOne, todoThree])
       })
     })
   })

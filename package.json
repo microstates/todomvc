@@ -5,16 +5,22 @@
   "main": "./build/index.js",
   "module": "./build/index.js",
   "jsnext:main": "./build/index.js",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "scripts": {
     "test": "mocha --require babel-core/register tests.js",
+    "test:watch": "npm test -- --watch",
     "build": "cross-env BABEL_ENV=es babel index.js --out-dir build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microstates/todomvc.git"
   },
-  "keywords": ["microstates", "todomvc"],
+  "keywords": [
+    "microstates",
+    "todomvc"
+  ],
   "author": "Taras Mankovski <taras@thisdot.co>",
   "license": "MIT",
   "bugs": {
