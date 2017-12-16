@@ -33,6 +33,7 @@ export default function connect(Model, WrappedComponent) {
       return createElement(WrappedComponent, {
         model: this.state,
         actions: this.actions,
+        ...this.props,
       })
     }
   }
