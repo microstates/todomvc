@@ -1,8 +1,11 @@
 import React from 'react'
+import Model from 'microstates-todomvc'
+
+import connect from '../../utils/connect'
 import Header from '../Header'
 import MainSection from '../MainSection'
 
-export default function App({ actions, model }) {
+function App({ actions, model }) {
   return (
     <div>
       <Header addTodo={actions.addTodo} />
@@ -10,3 +13,5 @@ export default function App({ actions, model }) {
     </div>
   )
 }
+
+export default connect(Model, App)

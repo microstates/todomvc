@@ -50,13 +50,12 @@ export default class Footer extends Component {
   }
 
   render() {
+    let filters = keys(this.props.FILTER_OPTIONS)
     return (
       <footer className="footer">
         {this.renderTodoCount()}
         <ul className="filters">
-          {keys(this.props.FILTER_OPTIONS).map(filter => (
-            <li key={filter}>{this.renderFilterLink(filter)}</li>
-          ))}
+          {filters.map(filter => <li key={filter}>{this.renderFilterLink(filter)}</li>)}
         </ul>
         {this.renderClearButton()}
       </footer>
