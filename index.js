@@ -63,10 +63,18 @@ export default class TodoMVC {
     return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0) + 1
   }
 
+  /**
+   * Number of items that are not complete
+   * @type Number
+   */
   get remainingCount() {
     return this.todos.length - this.completedCount
   }
 
+  /**
+   * Todo items based on current filter value
+   * @type Array
+   */
   get filteredTodos() {
     switch (this.filter) {
       case SHOW_ALL:
@@ -78,6 +86,10 @@ export default class TodoMVC {
     }
   }
 
+  /**
+   * True when todos are present
+   * @type Boolean
+   */
   get hasTodos() {
     return this.todos.length > 0
   }
