@@ -14,14 +14,12 @@ export default class MainSection extends Component {
   renderToggleAll(completedCount) {
     const { model, actions } = this.props
 
-    let count = model.todos.length
-
-    if (count > 0) {
+    if (model.hasTodos) {
       return (
         <input
           className="toggle-all"
           type="checkbox"
-          checked={completedCount === count}
+          checked={completedCount === model.todos.length}
           onChange={actions.completeAll}
         />
       )
@@ -31,7 +29,7 @@ export default class MainSection extends Component {
   renderFooter(completedCount) {
     const { model, actions } = this.props
 
-    if (model.todos.length) {
+    if (model.hasTodos) {
       return (
         <Footer
           FILTER_OPTIONS={model.FILTER_OPTIONS}
