@@ -22,9 +22,9 @@
             <strong>{{ model.remainingCount }}</strong> {{ model.remainingCount | pluralize }} left
             </span>
             <ul class="filters">
-                <li><router-link to="/" :class="{selected: model.filter == ''}">All</router-link></li>
-                <li><router-link to="/?filter=show_active" :class="{selected: model.filter == 'show_active'}" >Active</router-link></li>
-                <li><router-link to="/?filter=show_completed" :class="{selected: model.filter == 'show_completed'}">Completed</router-link></li>
+                <li v-for="(title, filter) in model.FILTER_OPTIONS" v-bind:key="filter">
+                  <router-link :to="`/${filter ? '?filter=' + filter : ''}`" :class="{selected: model.filter === filter}">{{title}}</router-link>
+                </li>
             </ul>
             <button class="clear-completed" v-show="model.completedCount > 0" @click.prevent="actions.clearCompleted">Clear Completed</button>
         </footer>
