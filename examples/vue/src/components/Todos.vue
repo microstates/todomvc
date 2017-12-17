@@ -5,7 +5,7 @@
             <input type="text" class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-bind:value="model.newTodo" v-on:input="actions.newTodo.set($event.target.value)" @keyup.enter="actions.insertNewTodo" />
         </header>
         <section class="main" v-show="model.hasTodos" v-cloak>
-            <!-- <input type="checkbox" class="toggle-all" v-model="allDone"> -->
+            <input type="checkbox" class="toggle-all" v-bind:checked="model.isAllComplete" @click="actions.toggleAll">
             <ul class="todo-list">
                 <li class="todo" v-for="todo in model.filteredTodos" :class="{completed : todo.completed, editing : todo.id === model.editing.id }" v-bind:key="todo.id">
                     <div class="view">
@@ -34,35 +34,9 @@
 <script>
 import Vue from 'vue'
 import connect from '../utils/connect'
-import * as MS from 'microstates'
 import TodoMVC from 'microstates-todomvc'
 
-class VueTodoMVC extends TodoMVC {
-  newTodo = MS.String
-  editing = MS.Object
-  editText = MS.String
-
-  finishEditing({ editing, editText }) {
-    return this()
-      .editTodo(editing, editText)
-      .editText.set('')
-      .editing.set(null)
-  }
-
-  startEditing(current, todo) {
-    return this()
-      .editing.set(todo)
-      .editText.set(todo.text)
-  }
-
-  insertNewTodo(current) {
-    return this()
-      .addTodo(current.newTodo)
-      .newTodo.set('')
-  }
-}
-
-export default connect(VueTodoMVC, {
+export default connect(TodoMVC, {
   props: ['filter'],
   filters: {
     pluralize: function(n) {

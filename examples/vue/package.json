@@ -15,7 +15,7 @@
     "vue-router": "^3.0.1",
     "funcadelic": "0.2.6",
     "microstates": "cowboyd/microstates.js#fix-microstate-mapping",
-    "microstates-todomvc": "1.0.0-beta.3"
+    "microstates-todomvc": "1.0.0-beta.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
