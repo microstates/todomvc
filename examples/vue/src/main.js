@@ -2,27 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import Director from 'director/build/director'
+import router from './router'
+
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-window.VueApp = new Vue({
-    el: '#app',
-    render: h => h(App)
+new Vue({
+  el: '#app',
+  router,
+  template: '<App/>',
+  components: { App }
 })
-
-const router = new Director.Router();
-
-['all', 'active', 'completed'].forEach(visibility => {
-  router.on(visibility, () => {
-    window.VueApp.filter = visibility;
-  });
-});
-
-router.configure({
-  notfound: function () {
-    window.location.hash = '';
-    window.VueApp.filter = 'all';
-  }
-});
-
-router.init();

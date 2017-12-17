@@ -5,13 +5,14 @@ export default function connect(Model, Component) {
   return {
     ...Component,
     data() {
+      let props = Component.props.reduce((acc, prop) => ({ ...acc, [prop]: this[prop] }), {})
       return {
-        microstate: microstate(Model),
-        ...Component.data(),
+        microstate: microstate(Model, props),
+        ...((Component.data && Component.data()) || {})
       }
     },
     computed: {
-      state() {
+      model() {
         return this.microstate.state
       },
       actions() {
@@ -19,7 +20,7 @@ export default function connect(Model, Component) {
           transition => (...args) => (this.microstate = transition(...args)),
           this.microstate
         )
-      },
-    },
+      }
+    }
   }
 }
