@@ -10,7 +10,7 @@
     "test": "mocha --require babel-core/register tests.js",
     "test:watch": "npm test -- --watch",
     "build": "cross-env BABEL_ENV=es babel index.js --out-dir build",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test && npm run build"
   },
   "repository": {
     "type": "git",
