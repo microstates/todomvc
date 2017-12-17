@@ -40,7 +40,7 @@ export default class TodoMVC {
   newTodo = MS.String
 
   /**
-   * Todo items that is currently being edited
+   * Todo item that is currently being edited
    * @type Object
    */
   editing = MS.Object
@@ -100,6 +100,14 @@ export default class TodoMVC {
    */
   get remainingCount() {
     return this.todos.length - this.completedCount
+  }
+
+  /**
+   * Are all items complete
+   * @type Boolean
+   */
+  get isAllComplete() {
+    return this.todos.length > 0 && this.remainingCount === 0
   }
 
   /**
@@ -232,5 +240,14 @@ export default class TodoMVC {
    */
   clearCompleted() {
     return this().todos.filter(({ completed }) => !completed)
+  }
+
+  /**
+   * Makes all items incomplete if all are complete and makes all complete
+   * if some are incomplete.
+   * @param {TodoMVC} current
+   */
+  toggleAll({ isAllComplete }) {
+    return this().todos.map(todo => ({ ...todo, completed: !isAllComplete }))
   }
 }

@@ -20,6 +20,13 @@ let filled = microstate(TodoMVC, value)
 let someCompleted = microstate(TodoMVC, {
   todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree]
 })
+let allCompleted = microstate(TodoMVC, {
+  todos: [
+    freeze({ id: 1, text: 'Make initial commit', completed: true }),
+    freeze({ id: 2, text: 'Write readme', completed: true }),
+    freeze({ id: 3, text: 'Release microstates', completed: true })
+  ]
+})
 
 describe('TodoMVC', function() {
   describe('state', function() {
@@ -83,6 +90,17 @@ describe('TodoMVC', function() {
       })
       it('is true when todos are present', function() {
         expect(filled.state.hasTodos).to.be.true
+      })
+    })
+    describe('isAllComplete', function() {
+      it('is false for empty', function() {
+        expect(empty.state.isAllComplete).to.be.false
+      })
+      it('is false when some are incomplete', function() {
+        expect(someCompleted.state.isAllComplete).to.be.false
+      })
+      it('is true when all items are complete', function() {
+        expect(allCompleted.state.isAllComplete).to.be.true
       })
     })
   })
@@ -169,6 +187,16 @@ describe('TodoMVC', function() {
       })
       it('clears newTodo text field', function() {
         expect(inserted.state.newTodo).to.equal('')
+      })
+    })
+    describe('toggleAll', function() {
+      let completed = someCompleted.toggleAll()
+      let noneCompleted = allCompleted.toggleAll()
+      it('makes some completed into all completed', function() {
+        expect(completed.state.isAllComplete).to.be.true
+      })
+      it('makes all completed into all incompleted', function() {
+        expect(noneCompleted.state.completedCount).to.equal(0)
       })
     })
   })
