@@ -9,7 +9,10 @@
     "trailing-comma": false,
     "only-arrow-functions": false,
     "prefer-const": false,
-    "member-access": [true, "no-public"]
+    "member-access": [true, "no-public"],
+    "semicolon": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }
