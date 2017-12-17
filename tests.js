@@ -178,6 +178,21 @@ describe('TodoMVC', function() {
         expect(edited.state.editing).to.deep.equal({})
       })
     })
+    describe('abandonEditing', function() {
+      let edited = filled
+        .startEditing(todoTwo)
+        .editText.set('Update readme')
+        .abandonEditing()
+      it('updated todo in todos', function() {
+        expect(edited.state.todos[1].text).to.equal('Write readme')
+      })
+      it('clears the editText', function() {
+        expect(edited.state.editText).to.equal('')
+      })
+      it('clears editing', function() {
+        expect(edited.state.editing).to.equal({})
+      })
+    })
     describe('insertNewTodo', function() {
       let inserted = empty.newTodo.set('Go for a walk').insertNewTodo()
       it('adds todo item', function() {

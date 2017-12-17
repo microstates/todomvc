@@ -213,6 +213,17 @@ export default class TodoMVC {
       .editing.set(null)
   }
 
+
+  /**
+   * Abandon editing a todo
+   * @param {TodoMVC} current
+   */
+  abandonEditing(current) {
+    return this()
+      .editText.set('')
+      .editing.set(null)
+  }
+
   /**
    * Show edit field for a specific todo
    * @param {TodoMVC} current
