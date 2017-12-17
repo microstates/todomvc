@@ -14,6 +14,6 @@ app.registerInitializer({
   }
 });
 
-app.renderComponent('Todomvc', containerElement, null);
+app.renderComponent('TodoApp', containerElement, null);
 
 app.boot();

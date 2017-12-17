@@ -3,11 +3,11 @@ import { setupRenderingTest } from '@glimmer/test-helpers';
 
 const { module, test } = QUnit;
 
-module('Component: Todomvc', function(hooks) {
+module('Component: TodoApp', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-    await this.render(hbs`<Todomvc />`);
-    assert.equal(this.containerElement.textContent, 'Welcome to Glimmer!\n');
+    await this.render(hbs`<TodoApp />`);
+    assert.ok(this.containerElement.querySelector('div'));
   });
 });
