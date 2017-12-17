@@ -31,8 +31,6 @@ export default class TodoApp extends Component {
       ]
     });
 
-    window.ms = this.ms;
-
     const updateFilter = (text = SHOW_ALL) => this.updateState(this.ms.filter.set, text);
 
     router
@@ -54,13 +52,9 @@ export default class TodoApp extends Component {
     event.target.value = '';
   }
 
-  updateState(fn, ...args) {
-    this.ms = fn(args);
-    window.ms = this.ms;
-  }
+  updateState = (fn, ...args) => (this.ms = fn(args));
 
   didUpdate() {
     console.log('🔥');
   }
-
 }
