@@ -26,14 +26,45 @@ export default class TodoMVC {
    * In this example, we're only composing an array into this microstate, but we can compose microstates of any
    * depth. Microstates will know how to transition that structure.
    */
+
+  /**
+   * Contains array of todo items
+   * @type Array
+   */
   todos = MS.Array
 
+  /**
+   * Text value of the new todo input field
+   * @type String
+   */
+  newTodo = MS.String
+
+  /**
+   * Todo items that is currently being edited
+   * @type Object
+   */
+  editing = MS.Object
+
+  /**
+   * Text value of the todo item that's being edited
+   * @type String
+   */
+  editText = MS.String
+
+  /**
+   * The current filter applied to the todo items
+   * @type String
+   */
   filter = MS.String
 
+  /**
+   * All possible filter options
+   * @type Object
+   */
   FILTER_OPTIONS = {
     [SHOW_ALL]: 'All',
     [SHOW_ACTIVE]: 'Active',
-    [SHOW_COMPLETED]: 'Completed',
+    [SHOW_COMPLETED]: 'Completed'
   }
 
   /**
@@ -121,7 +152,7 @@ export default class TodoMVC {
      */
     return this().todos.replace(todo, {
       ...todo,
-      completed: true,
+      completed: true
     })
   }
 
@@ -135,7 +166,7 @@ export default class TodoMVC {
     // Find the todo that we want to update and replace it with new item with changed text.
     return this().todos.replace(todo, {
       ...todo,
-      text,
+      text
     })
   }
 
@@ -150,7 +181,7 @@ export default class TodoMVC {
   }
 
   /**
-   * Add a todo item to the list
+   * Add a todo item to the list by providing a text field for the todo.
    * @param {TodoMVC} current
    * @param {String} text
    */
@@ -159,8 +190,41 @@ export default class TodoMVC {
     return this().todos.push({
       text,
       id: current.nextId,
-      completed: false,
+      completed: false
     })
+  }
+
+  /**
+   * Save edited todo and hide edit field for the todo
+   * @param {TodoMVC} current
+   */
+  finishEditing({ editing, editText }) {
+    return this()
+      .editTodo(editing, editText)
+      .editText.set('')
+      .editing.set(null)
+  }
+
+  /**
+   * Show edit field for a specific todo
+   * @param {TodoMVC} current
+   * @param {Object} todo
+   */
+  startEditing(current, todo) {
+    return this()
+      .editing.set(todo)
+      .editText.set(todo.text)
+  }
+
+  /**
+   * Creates a todo from input in newTodo text field and prepare new todo field for
+   * input of next todo item.
+   * @param {TodoMVC} current
+   */
+  insertNewTodo({ newTodo }) {
+    return this()
+      .addTodo(newTodo)
+      .newTodo.set('')
   }
 
   /**

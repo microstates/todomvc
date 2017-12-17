@@ -13,12 +13,12 @@ let todoOne = freeze({ id: 1, text: 'Make initial commit', completed: false })
 let todoTwo = freeze({ id: 2, text: 'Write readme', completed: false })
 let todoThree = freeze({ id: 3, text: 'Release microstates', completed: false })
 let value = freeze({
-  todos: freeze([todoOne, todoTwo, todoThree]),
+  todos: freeze([todoOne, todoTwo, todoThree])
 })
 let empty = microstate(TodoMVC)
 let filled = microstate(TodoMVC, value)
 let someCompleted = microstate(TodoMVC, {
-  todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree],
+  todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree]
 })
 
 describe('TodoMVC', function() {
@@ -63,16 +63,16 @@ describe('TodoMVC', function() {
       it('has only completed when filter is SHOW_COMPLETED', function() {
         let ms = microstate(TodoMVC, {
           filter: SHOW_COMPLETED,
-          todos,
+          todos
         })
         expect(ms.state.filteredTodos).to.deep.equal([
-          { id: 2, text: 'Write readme', completed: true },
+          { id: 2, text: 'Write readme', completed: true }
         ])
       })
       it('has only active when filter is SHOW_ACTIVE', function() {
         let ms = microstate(TodoMVC, {
           filter: SHOW_ACTIVE,
-          todos,
+          todos
         })
         expect(ms.state.filteredTodos).to.deep.equal([todoOne, todoThree])
       })
@@ -95,7 +95,7 @@ describe('TodoMVC', function() {
       expect(todos).to.deep.equal([
         { id: 1, text: 'Make initial commit', completed: true },
         { id: 2, text: 'Write readme', completed: false },
-        { id: 3, text: 'Release microstates', completed: false },
+        { id: 3, text: 'Release microstates', completed: false }
       ])
     })
     it('edits todo with editTodo', function() {
@@ -105,7 +105,7 @@ describe('TodoMVC', function() {
       expect(todos).to.deep.equal([
         { id: 1, text: 'Make initial commit', completed: false },
         { id: 2, text: 'Write README', completed: false },
-        { id: 3, text: 'Release microstates', completed: false },
+        { id: 3, text: 'Release microstates', completed: false }
       ])
     })
     it('deletes todo with deleteTodo', function() {
@@ -114,7 +114,7 @@ describe('TodoMVC', function() {
         .valueOf()
       expect(todos).to.deep.equal([
         { id: 1, text: 'Make initial commit', completed: false },
-        { id: 2, text: 'Write readme', completed: false },
+        { id: 2, text: 'Write readme', completed: false }
       ])
     })
     it('adds todo with addTodo', function() {
@@ -125,16 +125,51 @@ describe('TodoMVC', function() {
         { id: 1, text: 'Make initial commit', completed: false },
         { id: 2, text: 'Write readme', completed: false },
         { id: 3, text: 'Release microstates', completed: false },
-        { id: 4, text: 'Write tests', completed: false },
+        { id: 4, text: 'Write tests', completed: false }
       ])
     })
     it('clears completed with clearCompleted', function() {
       let { todos } = microstate(TodoMVC, {
-        todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree],
+        todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree]
       })
         .clearCompleted()
         .valueOf()
       expect(todos).to.deep.equal([todoOne, todoThree])
+    })
+    describe('startEditing', function() {
+      let startedEditing = filled.startEditing(todoTwo)
+      it('sets todo as editing', function() {
+        expect(startedEditing.state.editing.id).to.equal(todoTwo.id)
+      })
+      it('sets editText to name of the todo', () => {
+        expect(startedEditing.state.editText).to.equal('Write readme')
+      })
+    })
+    describe('finishEditing', function() {
+      let edited = filled
+        .startEditing(todoTwo)
+        .editText.set('Update readme')
+        .finishEditing()
+      it('updated todo in todos', function() {
+        expect(edited.state.todos[1].text).to.equal('Update readme')
+      })
+      it('clears the editText', function() {
+        expect(edited.state.editText).to.equal('')
+      })
+      it('clears editing', function() {
+        expect(edited.state.editing).to.deep.equal({})
+      })
+    })
+    describe('insertNewTodo', function() {
+      let inserted = empty.newTodo.set('Go for a walk').insertNewTodo()
+      it('adds todo item', function() {
+        expect(inserted.state.todos).to.deep.equal([
+          { id: 1, text: 'Go for a walk', completed: false }
+        ])
+      })
+      it('clears newTodo text field', function() {
+        expect(inserted.state.newTodo).to.equal('')
+      })
     })
   })
 })
