@@ -7,16 +7,15 @@ const router = new Navigo(null, true);
 const filterStates = { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE };
 
 export default class TodoApp extends Component {
-  // @tracked newTodoText;
-
-  @tracked microstate;
+  /** Microstate */
+  @tracked ms;
 
   filterStates = filterStates;
 
   constructor(options) {
     super(options);
 
-    const todoModel = microstates(TodoModel, {
+    this.ms = microstates(TodoModel, {
       filter: SHOW_ALL,
       todos: [
         {
@@ -32,14 +31,17 @@ export default class TodoApp extends Component {
       ]
     });
 
-    this.microstate = todoModel;
-    window.ms = this.microstate;
+    window.ms = this.ms;
+
+    const updateFilter = (text = SHOW_ALL) => this.updateState(this.ms.filter.set, text);
+
     router
       .on({
-        '/': () => (this.microstate = this.microstate.filter.set(SHOW_ALL)),
-        '/active': () => (this.microstate = this.microstate.filter.set(SHOW_ACTIVE)),
-        '/completed': () => (this.microstate = this.microstate.filter.set(SHOW_COMPLETED))
+        '/': updateFilter,
+        '/active': () => updateFilter(SHOW_ACTIVE),
+        '/completed': () => updateFilter(SHOW_COMPLETED)
       })
+      .notFound(updateFilter)
       .resolve();
   }
 
@@ -48,21 +50,17 @@ export default class TodoApp extends Component {
     if (code !== 'Enter') {
       return;
     }
-    this.microstate = this.microstate.addTodo(newTodoText);
+    this.updateState(this.ms.addTodo, newTodoText);
     event.target.value = '';
-    window.ms = this.microstate;    
   }
 
-  clearCompleted() {
-    this.microstate = this.microstate.clearCompleted();
+  updateState(fn, ...args) {
+    this.ms = fn(args);
+    window.ms = this.ms;
   }
 
   didUpdate() {
-    console.log('🚀');
-  }
-
-  markAllAsCompleted() {
-    
+    console.log('🔥');
   }
 
 }
