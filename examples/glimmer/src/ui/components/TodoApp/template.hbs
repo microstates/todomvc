@@ -1,51 +1,52 @@
 <section class="todoapp">
   <header class="header">
     <h1>Todos</h1>
-    <input class="new-todo" placeholder="What needs to be done?" autofocus>
+    <input type="text" 
+          class="new-todo" 
+          autofocus 
+          autocomplete="off" 
+          placeholder="What needs to be done?"
+          onkeydown={{action addTodo}} />
   </header>
+
   <!-- This section should be hidden by default and shown when there are todos -->
-  <section class="main">
-    <input id="toggle-all" class="toggle-all" type="checkbox">
-    <label for="toggle-all">Mark all as complete</label>
-    <ul class="todo-list">
-      <!-- These are here just to show the structure of the list items -->
-      <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-      <li class="completed">
-        <div class="view">
-          <input class="toggle" type="checkbox" checked>
-          <label>Taste JavaScript</label>
-          <button class="destroy"></button>
-        </div>
-        <input class="edit" value="Create a TodoMVC template">
-      </li>
-      <li>
-        <div class="view">
-          <input class="toggle" type="checkbox">
-          <label>Buy a unicorn</label>
-          <button class="destroy"></button>
-        </div>
-        <input class="edit" value="Rule the web">
-      </li>
-    </ul>
-  </section>
+  {{#if microstate.state.hasTodos}}
+    <section class="main">
+      <input id="toggle-all" class="toggle-all" type="checkbox">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul class="todo-list">
+        <!-- These are here just to show the structure of the list items -->
+        <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+        {{#each microstate.state.filteredTodos key="id" as |todo| }}
+          <li class="{{if todo.completed 'completed'}}">
+            <div class="view">
+              <input class="toggle" type="checkbox" checked={{if todo.completed 'checked'}}>
+              <label>{{todo.text}}</label>
+              <button class="destroy"></button>
+            </div>
+            <input class="edit" value={{todo.text}}>
+          </li>
+        {{/each}}
+
+      </ul>
+    </section>
+  {{/if}}
+
   <!-- This footer should hidden by default and shown when there are todos -->
   <footer class="footer">
     <!-- This should be `0 items left` by default -->
-    <span class="todo-count"><strong>0</strong> item left</span>
+    <span class="todo-count"><strong>{{microstate.state.remainingCount}}</strong> item left</span>
     <!-- Remove this if you don't implement routing -->
     <ul class="filters">
-      <li>
-        <a class="{{if (eq mode 'all') "selected"}}" href="#/">All</a>
-      </li>
-      <li>
-        <a class="{{if (eq mode 'active') "selected"}}" href="#/active">Active</a>
-      </li>
-      <li>
-        <a class="{{if (eq mode 'completed') "selected"}}" href="#/completed">Completed</a>
-      </li>
+       <li><a href="#/" class="{{if (eq microstate.state.filter filterStates.SHOW_ALL) "selected"}}">All</a></li>
+        <li><a href="#/active" class="{{if (eq microstate.state.filter filterStates.SHOW_ACTIVE) "selected"}}">Active</a></li>
+        <li><a href="#/completed" class="{{if (eq microstate.state.filter filterStates.SHOW_COMPLETED) "selected"}}">Completed</a></li>
     </ul>
+
     <!-- Hidden if no completed items are left ↓ -->
-    <button class="clear-completed">Clear completed</button>
+    {{#if microstate.state.completedCount}}
+      <button class="clear-completed" onclick={{action clearCompleted}}>Clear completed</button>
+    {{/if}}
   </footer>
 </section>
 <footer class="info">
