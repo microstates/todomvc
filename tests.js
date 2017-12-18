@@ -181,14 +181,18 @@ describe('TodoMVC', function() {
       })
     })
     describe('insertNewTodo', function() {
-      let inserted = empty.newTodo.set('Go for a walk').insertNewTodo()
+      let withText = empty.newTodo.set('Go for a walk').insertNewTodo()
+      let withEmpty = empty.insertNewTodo()
+      it('does not add item when newTodo is empty', function() {
+        expect(withEmpty.state.todos.length).to.equal(0)
+      })
       it('adds todo item', function() {
-        expect(inserted.state.todos).to.deep.equal([
+        expect(withText.state.todos).to.deep.equal([
           { id: 1, text: 'Go for a walk', completed: false }
         ])
       })
       it('clears newTodo text field', function() {
-        expect(inserted.state.newTodo).to.equal('')
+        expect(withText.state.newTodo).to.equal('')
       })
     })
     describe('toggleAll', function() {

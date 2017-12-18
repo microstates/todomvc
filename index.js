@@ -244,10 +244,15 @@ export default class TodoMVC {
    * input of next todo item.
    * @param {TodoMVC} current
    */
-  insertNewTodo({ newTodo }) {
-    return this()
-      .addTodo(newTodo)
-      .newTodo.set('')
+  insertNewTodo(current) {
+    let { newTodo } = current
+    if (newTodo.length === 0) {
+      return current
+    } else {
+      return this()
+        .addTodo(newTodo)
+        .newTodo.set('')
+    }
   }
 
   /**
