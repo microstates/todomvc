@@ -4203,9 +4203,9 @@ micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
-microstates-todomvc@1.0.0-beta.3:
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/microstates-todomvc/-/microstates-todomvc-1.0.0-beta.3.tgz#c765bd12749e905fb489f9034ec23652ae883ceb"
+microstates-todomvc@1.0.0-beta.10:
+  version "1.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/microstates-todomvc/-/microstates-todomvc-1.0.0-beta.10.tgz#90ef0000769772a3fef853fef01e912868cc07ad"
   dependencies:
     microstates "0.3.0"
 
