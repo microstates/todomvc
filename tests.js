@@ -202,23 +202,16 @@ describe('TodoMVC', function() {
       })
     })
     describe('updateTodo', function() {
-      let editingTwo = filled.editing.set(todoTwo)
-      let updated = editingTwo.updateTodo(todoTwo, 'Edit readme')
-      let deleted = editingTwo.updateTodo(todoTwo, '')
+      let updated = filled.updateTodo(todoTwo, 'Edit readme')
+      let deleted = filled.updateTodo(todoTwo, '')
       it('edits todo when text changed', function() {
         expect(updated.state.todos[1].text).to.equal('Edit readme')
-      })
-      it('clears editing after updated', function() {
-        expect(updated.state.editing).to.deep.equal({})
       })
       it('deletes todo when text is empty', function() {
         expect(deleted.state.todos).to.deep.equal([
           { id: 1, text: 'Make initial commit', completed: false },
           { id: 3, text: 'Release microstates', completed: false }
         ])
-      })
-      it('clears editing after deleted', function() {
-        expect(deleted.state.editing).to.deep.equal({})
       })
     })
   })

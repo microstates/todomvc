@@ -173,13 +173,9 @@ export default class TodoMVC {
    */
   updateTodo(current, todo, text = '') {
     if (text.length === 0) {
-      return this()
-        .deleteTodo(todo)
-        .editing.set(null)
+      return this().deleteTodo(todo)
     } else {
-      return this()
-        .editTodo(todo, text)
-        .editing.set(null)
+      return this().editTodo(todo, text)
     }
   }
 
@@ -227,7 +223,7 @@ export default class TodoMVC {
    */
   finishEditing({ editing, editText }) {
     return this()
-      .editTodo(editing, editText)
+      .updateTodo(editing, editText)
       .editText.set('')
       .editing.set(null)
   }
