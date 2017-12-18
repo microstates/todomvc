@@ -9,7 +9,7 @@
             <ul class="todo-list">
                 <li class="todo" v-for="todo in model.filteredTodos" :class="{completed : todo.completed, editing : todo.id === model.editing.id }" v-bind:key="todo.id">
                     <div class="view">
-                        <input type="checkbox" :checked="todo.completed" @change="actions.completeTodo(todo)"  class="toggle">
+                        <input type="checkbox" :checked="todo.completed" @change="actions.toggleTodo(todo)"  class="toggle">
                         <label @dblclick="actions.startEditing(todo)">{{ todo.text }}</label>
                         <button class="destroy" @click.prevent="actions.deleteTodo(todo)"></button>
                     </div>
