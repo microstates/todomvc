@@ -150,7 +150,7 @@ export default class TodoMVC {
    * @param {TodoMVC} current state
    * @param {Object} todo
    */
-  completeTodo(current, todo) {
+  toggleTodo(current, todo) {
     /**
      * microstates doesn't support transitioning state that is composed into an array (yet).
      * We can transition the array, but not values in that array. We're planning
@@ -160,7 +160,7 @@ export default class TodoMVC {
      */
     return this().todos.replace(todo, {
       ...todo,
-      completed: true
+      completed: !todo.completed
     })
   }
 

@@ -106,15 +106,17 @@ describe('TodoMVC', function() {
   })
 
   describe('transitions', function() {
-    it('completes todo with completeTodo', function() {
-      let { todos } = microstate(TodoMVC, value)
-        .completeTodo(todoOne)
-        .valueOf()
-      expect(todos).to.deep.equal([
-        { id: 1, text: 'Make initial commit', completed: true },
-        { id: 2, text: 'Write readme', completed: false },
-        { id: 3, text: 'Release microstates', completed: false }
-      ])
+    describe('toggleTodo', function() {
+      it('makes todo complete when previously incomplete', function() {
+        let todo = someCompleted.state.todos[0]
+        let toggled = someCompleted.toggleTodo(todo)
+        expect(toggled.state.todos[0].completed).to.be.true
+      })
+      it('makes todo incomplete when previously complete', function() {
+        let todo = someCompleted.state.todos[1]
+        let toggled = someCompleted.toggleTodo(todo)
+        expect(toggled.state.todos[1].completed).to.be.false
+      })
     })
     it('edits todo with editTodo', function() {
       let { todos } = microstate(TodoMVC, value)
