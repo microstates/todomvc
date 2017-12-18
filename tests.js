@@ -201,5 +201,18 @@ describe('TodoMVC', function() {
         expect(noneCompleted.state.completedCount).to.equal(0)
       })
     })
+    describe('updateTodo', function() {
+      it('edits todo when text changed', function() {
+        let updated = filled.updateTodo(todoTwo, 'Edit readme')
+        expect(updated.state.todos[1].text).to.equal('Edit readme')
+      })
+      it('deletes todo when text is empty', function() {
+        let deleted = filled.updateTodo(todoTwo, '')
+        expect(deleted.state.todos).to.deep.equal([
+          { id: 1, text: 'Make initial commit', completed: false },
+          { id: 3, text: 'Release microstates', completed: false }
+        ])
+      })
+    })
   })
 })

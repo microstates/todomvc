@@ -165,6 +165,20 @@ export default class TodoMVC {
   }
 
   /**
+   * Update a todo. If text is empty, delete it otherwise change the text.
+   * @param {TodoMVC} current
+   * @param {Object} todo
+   * @param {String} text
+   */
+  updateTodo(current, todo, text = '') {
+    if (text.length === 0) {
+      return this().deleteTodo(todo)
+    } else {
+      return this().editTodo(todo, text)
+    }
+  }
+
+  /**
    * Change the text of a todo item
    * @param {TodoMVC} current
    * @param {Object} todo
