@@ -9,7 +9,7 @@ export default class Footer extends Component {
     activeCount: PropTypes.number.isRequired,
     filter: PropTypes.string.isRequired,
     onClearCompleted: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired,
+    onShow: PropTypes.func.isRequired
   }
 
   renderTodoCount() {

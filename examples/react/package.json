@@ -12,14 +12,12 @@
     "funcadelic": "0.2.6",
     "hoist-non-react-statics": "2.3.1",
     "jest": "^21.2.1",
-    "microstates": "cowboyd/microstates.js#fix-microstate-mapping",
-    "microstates-todomvc": "1.0.0-beta.3",
+    "microstates": "cowboyd/microstates.js#tmp-all-in",
+    "microstates-todomvc": "1.0.0-beta.10",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-dom": "^15.5.0",
-    "react-redux": "^5.0.5",
     "react-test-renderer": "^15.5.4",
-    "redux": "^3.5.2",
     "todomvc-app-css": "^2.1.0"
   },
   "scripts": {

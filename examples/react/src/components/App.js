@@ -8,7 +8,7 @@ import MainSection from './MainSection'
 function App({ actions, model }) {
   return (
     <div>
-      <Header addTodo={actions.addTodo} />
+      <Header newTodo={model.newTodo} actions={actions} />
       <MainSection model={model} actions={actions} />
     </div>
   )

@@ -6,34 +6,32 @@ import Footer from './Footer'
 export default class MainSection extends Component {
   static propTypes = {
     model: PropTypes.shape({
-      todos: PropTypes.array.isRequired,
+      todos: PropTypes.array.isRequired
     }),
-    actions: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
   }
 
-  renderToggleAll(completedCount) {
+  renderToggleAll() {
     const { model, actions } = this.props
 
     if (model.hasTodos) {
       return (
-        <input
-          className="toggle-all"
-          type="checkbox"
-          checked={completedCount === model.todos.length}
-          onChange={actions.completeAll}
-        />
+        <span>
+          <input className="toggle-all" type="checkbox" checked={model.isAllComplete} />
+          <label onClick={actions.toggleAll} />
+        </span>
       )
     }
   }
 
-  renderFooter(completedCount) {
+  renderFooter() {
     const { model, actions } = this.props
 
     if (model.hasTodos) {
       return (
         <Footer
           FILTER_OPTIONS={model.FILTER_OPTIONS}
-          completedCount={completedCount}
+          completedCount={model.completedCount}
           activeCount={model.remainingCount}
           filter={model.filter}
           onClearCompleted={() => actions.clearCompleted()}
@@ -48,11 +46,19 @@ export default class MainSection extends Component {
 
     return (
       <section className="main">
-        {this.renderToggleAll(model.completedCount)}
+        {this.renderToggleAll()}
         <ul className="todo-list">
-          {model.filteredTodos.map(todo => <TodoItem key={todo.id} todo={todo} {...actions} />)}
+          {model.filteredTodos.map(todo => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              editText={model.editText}
+              editing={model.editing}
+              actions={actions}
+            />
+          ))}
         </ul>
-        {this.renderFooter(model.completedCount)}
+        {this.renderFooter()}
       </section>
     )
   }
