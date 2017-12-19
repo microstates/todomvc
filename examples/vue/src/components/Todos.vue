@@ -39,7 +39,16 @@ import connect from '../utils/connect'
 import TodoMVC from 'microstates-todomvc'
 
 export default connect(TodoMVC, {
-  props: ['filter'],
+  props: {
+    filter: String,
+    todos: {
+      type: Array,
+      default() {
+        return [{ id: 0, text: 'Write Microstates Docs', completed: false }]
+      }
+    }
+  },
+
   filters: {
     pluralize: function(n) {
       return n === 1 ? 'item' : 'items'

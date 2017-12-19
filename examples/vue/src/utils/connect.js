@@ -5,7 +5,10 @@ export default function connect(Model, Component) {
   return {
     ...Component,
     data() {
-      let props = Component.props.reduce((acc, prop) => ({ ...acc, [prop]: this[prop] }), {})
+      let props = Object.keys(Component.props).reduce(
+        (acc, prop) => ({ ...acc, [prop]: this[prop] }),
+        {}
+      )
       return {
         microstate: microstate(Model, props),
         ...((Component.data && Component.data()) || {})

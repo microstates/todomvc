@@ -11,11 +11,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2",
+    "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "funcadelic": "0.2.6",
     "microstates": "cowboyd/microstates.js#tmp-all-in",
-    "microstates-todomvc": "1.0.0-beta.9"
+    "microstates-todomvc": "1.0.0-beta.10"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -57,7 +57,7 @@
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
