@@ -8,12 +8,14 @@
             <input type="checkbox" class="toggle-all" v-bind:checked="model.isAllComplete" @click="actions.toggleAll">
             <ul class="todo-list">
                 <li class="todo" v-for="todo in model.filteredTodos" :class="{completed : todo.completed, editing : todo.id === model.editing.id }" v-bind:key="todo.id">
-                    <div class="view">
-                        <input type="checkbox" :checked="todo.completed" @change="actions.toggleTodo(todo)"  class="toggle">
-                        <label @dblclick="actions.startEditing(todo)">{{ todo.text }}</label>
-                        <button class="destroy" @click.prevent="actions.deleteTodo(todo)"></button>
-                    </div>
-                    <input type="text" class="edit" v-bind:value="model.editText" v-on:input="actions.editText.set($event.target.value)" @keyup.enter="actions.finishEditing" @blur="actions.finishEditing" v-todoFocus="todo === model.editing" />
+                    <template v-if="todo.id === model.editing.id">
+                      <input type="text" class="edit" v-bind:value="model.editText" v-on:input="actions.editText.set($event.target.value)" @keyup.enter="actions.finishEditing" @blur="actions.finishEditing" v-todoFocus />
+                    </template>
+                    <template v-else>
+                      <input type="checkbox" :checked="todo.completed" @change="actions.toggleTodo(todo)"  class="toggle">
+                      <label @dblclick="actions.startEditing(todo)">{{ todo.text }}</label>
+                      <button class="destroy" @click.prevent="actions.deleteTodo(todo)"></button>
+                   </template>
                 </li>
             </ul>
         </section>
@@ -37,7 +39,16 @@ import connect from '../utils/connect'
 import TodoMVC from 'microstates-todomvc'
 
 export default connect(TodoMVC, {
-  props: ['filter'],
+  props: {
+    filter: String,
+    todos: {
+      type: Array,
+      default() {
+        return [{ id: 0, text: 'Write Microstates Docs', completed: false }]
+      }
+    }
+  },
+
   filters: {
     pluralize: function(n) {
       return n === 1 ? 'item' : 'items'

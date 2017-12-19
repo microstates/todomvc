@@ -7,7 +7,7 @@ import TodoTextInput from './TodoTextInput'
 class TodoItem extends Component {
   static propTypes = {
     todo: PropTypes.object.isRequired,
-    editing: PropTypes.object.isRequired,
+    isEditing: PropTypes.bool,
     actions: PropTypes.shape({
       updateTodo: PropTypes.func.isRequired,
       toggleTodo: PropTypes.func.isRequired,
@@ -46,8 +46,7 @@ class TodoItem extends Component {
   }
 
   render() {
-    let { todo } = this.props
-    let isEditing = this.props.editing.id === todo.id
+    let { todo, isEditing } = this.props
     return (
       <li
         className={classnames({
