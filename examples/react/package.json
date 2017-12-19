@@ -3,21 +3,20 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "enzyme": "^2.8.2",
-    "react-addons-test-utils": "^15.5.1",
-    "react-scripts": "^1.0.2"
+    "react-addons-test-utils": "^15.6.2",
+    "react-scripts": "^1.0.17",
+    "hoist-non-react-statics": "2.3.1",
+    "jest": "^22.0.3",
+    "react-test-renderer": "^16.2.0",
+    "prop-types": "^15.6.0"
   },
   "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "classnames": "^2.2.5",
     "funcadelic": "0.2.6",
-    "hoist-non-react-statics": "2.3.1",
-    "jest": "^21.2.1",
     "microstates": "cowboyd/microstates.js#tmp-all-in",
     "microstates-todomvc": "1.0.0-beta.10",
-    "prop-types": "^15.5.10",
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0",
-    "react-test-renderer": "^15.5.4",
     "todomvc-app-css": "^2.1.0"
   },
   "scripts": {
