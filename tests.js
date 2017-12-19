@@ -133,6 +133,11 @@ describe('TodoMVC', function() {
         let toggled = someCompleted.toggleTodo(todo)
         expect(toggled.state.todos[1].completed).to.be.false
       })
+      it('supports editableTodos', function() {
+        let todo = someCompleted.state.editableTodos[0]
+        let toggled = someCompleted.toggleTodo(todo)
+        expect(toggled.state.todos[0].completed).to.be.true
+      })
     })
     it('edits todo with editTodo', function() {
       let { todos } = microstate(TodoMVC, value)

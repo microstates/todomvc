@@ -158,7 +158,7 @@ export default class TodoMVC {
    * @param {TodoMVC} current state
    * @param {Object} todo
    */
-  toggleTodo(current, todo) {
+  toggleTodo(current, { id }) {
     /**
      * microstates doesn't support transitioning state that is composed into an array (yet).
      * We can transition the array, but not values in that array. We're planning
@@ -166,6 +166,7 @@ export default class TodoMVC {
      *
      * Find the todo that we want to update and replace it with new item that has completed true.
      */
+    let todo = current.todos.find(todo => todo.id === id)
     return this().todos.replace(todo, {
       ...todo,
       completed: !todo.completed
