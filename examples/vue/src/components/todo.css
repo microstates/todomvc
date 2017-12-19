@@ -164,10 +164,6 @@ label[for='toggle-all'] {
   margin: 0 0 0 43px;
 }
 
-.todo-list li.editing .view {
-  display: none;
-}
-
 .todo-list li .toggle {
   text-align: center;
   width: 40px;
