@@ -103,6 +103,22 @@ describe('TodoMVC', function() {
         expect(allCompleted.state.isAllComplete).to.be.true
       })
     })
+    describe('editableTodos', function() {
+      let editing = someCompleted.editing.set(todoOne)
+      it('marks editing todo', function() {
+        expect(editing.state.editableTodos).to.deep.equal([
+          { ...todoOne, editing: true },
+          { ...todoTwo, completed: true, editing: false },
+          { ...todoThree, editing: false }
+        ])
+      })
+      it('respects the filter', function() {
+        expect(editing.filter.set(SHOW_ACTIVE).state.editableTodos).to.deep.equal([
+          { ...todoOne, editing: true },
+          { ...todoThree, editing: false }
+        ])
+      })
+    })
   })
 
   describe('transitions', function() {
@@ -192,7 +208,7 @@ describe('TodoMVC', function() {
         expect(edited.state.editText).to.equal('')
       })
       it('clears editing', function() {
-        expect(edited.state.editing).to.equal({})
+        expect(edited.state.editing).to.deep.equal({})
       })
     })
     describe('insertNewTodo', function() {

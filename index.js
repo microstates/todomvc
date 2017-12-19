@@ -126,6 +126,14 @@ export default class TodoMVC {
   }
 
   /**
+   * Filtered todo items decorated with editing status relative to todo that's being edited
+   * @type Array
+   */
+  get editableTodos() {
+    return this.filteredTodos.map(todo => ({ ...todo, editing: todo.id === this.editing.id }))
+  }
+
+  /**
    * True when todos are present
    * @type Boolean
    */
@@ -227,7 +235,6 @@ export default class TodoMVC {
       .editText.set('')
       .editing.set(null)
   }
-
 
   /**
    * Abandon editing a todo
