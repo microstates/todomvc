@@ -194,8 +194,9 @@ export default class TodoMVC {
    * @param {Object} todo
    * @param {String} text
    */
-  editTodo(current, todo, text) {
+  editTodo(current, { id }, text) {
     // Find the todo that we want to update and replace it with new item with changed text.
+    let todo = current.todos.find(todo => todo.id === id)
     return this().todos.replace(todo, {
       ...todo,
       text

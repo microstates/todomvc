@@ -139,15 +139,23 @@ describe('TodoMVC', function() {
         expect(toggled.state.todos[0].completed).to.be.true
       })
     })
-    it('edits todo with editTodo', function() {
-      let { todos } = microstate(TodoMVC, value)
-        .editTodo(todoTwo, 'Write README')
-        .valueOf()
-      expect(todos).to.deep.equal([
-        { id: 1, text: 'Make initial commit', completed: false },
-        { id: 2, text: 'Write README', completed: false },
-        { id: 3, text: 'Release microstates', completed: false }
-      ])
+    describe('editTodo', function() {
+      let edited = filled.editTodo(todoTwo, 'Update README')
+      let editableCopy = filled.editTodo(filled.state.editableTodos[1], 'Update README')
+      it('updated the text', function() {
+        expect(edited.state.todos).to.deep.equal([
+          { id: 1, text: 'Make initial commit', completed: false },
+          { id: 2, text: 'Update README', completed: false },
+          { id: 3, text: 'Release microstates', completed: false }
+        ])
+      })
+      it('supports copied objects', () => {
+        expect(editableCopy.state.todos).to.deep.equal([
+          { id: 1, text: 'Make initial commit', completed: false },
+          { id: 2, text: 'Update README', completed: false },
+          { id: 3, text: 'Release microstates', completed: false }
+        ])
+      })
     })
     describe('deleteTodo', function() {
       let deleted = filled.deleteTodo(todoThree)
