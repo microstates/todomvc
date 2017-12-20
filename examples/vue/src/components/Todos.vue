@@ -7,8 +7,8 @@
         <section class="main" v-show="model.hasTodos" v-cloak>
             <input type="checkbox" class="toggle-all" v-bind:checked="model.isAllComplete" @click="actions.toggleAll">
             <ul class="todo-list">
-                <li class="todo" v-for="todo in model.filteredTodos" :class="{completed : todo.completed, editing : todo.id === model.editing.id }" v-bind:key="todo.id">
-                    <template v-if="todo.id === model.editing.id">
+                <li class="todo" v-for="todo in model.editableTodos" :class="{completed : todo.completed, editing : todo.editing }" v-bind:key="todo.id">
+                    <template v-if="todo.editing">
                       <input type="text" class="edit" v-bind:value="model.editText" v-on:input="actions.editText.set($event.target.value)" @keyup.enter="actions.finishEditing" @blur="actions.finishEditing" v-todoFocus />
                     </template>
                     <template v-else>
