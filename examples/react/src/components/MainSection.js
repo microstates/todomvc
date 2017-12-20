@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import TodoItem from './TodoItem'
+import { shape, array, func } from 'prop-types'
+import TodoList from './TodoList'
 import Footer from './Footer'
 
 export default function MainSection({ model, actions }) {
@@ -12,17 +12,7 @@ export default function MainSection({ model, actions }) {
           <label onClick={actions.toggleAll} />
         </span>
       ) : null}
-      <ul className="todo-list">
-        {model.filteredTodos.map(todo => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            editText={model.editText}
-            isEditing={model.editing.id === todo.id}
-            actions={actions}
-          />
-        ))}
-      </ul>
+      <TodoList todos={model.editableTodos} editText={model.editText} actions={actions} />
       {model.hasTodos ? (
         <Footer
           FILTER_OPTIONS={model.FILTER_OPTIONS}
@@ -38,9 +28,10 @@ export default function MainSection({ model, actions }) {
 }
 
 MainSection.propTypes = {
-  model: PropTypes.shape({
-    hasTodos: PropTypes.bool.isRequired,
-    todos: PropTypes.array.isRequired
+  model: shape({
+    todos: array.isRequired
   }),
-  actions: PropTypes.object.isRequired
+  actions: shape({
+    clearCompleted: func.isRequired
+  })
 }
