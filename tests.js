@@ -149,14 +149,21 @@ describe('TodoMVC', function() {
         { id: 3, text: 'Release microstates', completed: false }
       ])
     })
-    it('deletes todo with deleteTodo', function() {
-      let { todos } = microstate(TodoMVC, value)
-        .deleteTodo(todoThree)
-        .valueOf()
-      expect(todos).to.deep.equal([
-        { id: 1, text: 'Make initial commit', completed: false },
-        { id: 2, text: 'Write readme', completed: false }
-      ])
+    describe('deleteTodo', function() {
+      let deleted = filled.deleteTodo(todoThree)
+      let deletedCopy = filled.deleteTodo({ ...todoThree })
+      it('removes a todo from todos', function() {
+        expect(deleted.state.todos).to.deep.equal([
+          { id: 1, text: 'Make initial commit', completed: false },
+          { id: 2, text: 'Write readme', completed: false }
+        ])
+      })
+      it('removes a todo from a clone', function() {
+        expect(deletedCopy.state.todos).to.deep.equal([
+          { id: 1, text: 'Make initial commit', completed: false },
+          { id: 2, text: 'Write readme', completed: false }
+        ])
+      })
     })
     it('adds todo with addTodo', function() {
       let { todos } = microstate(TodoMVC, value)

@@ -207,9 +207,9 @@ export default class TodoMVC {
    * @param {TodoMVC} current
    * @param {Object} todo
    */
-  deleteTodo(current, todo) {
+  deleteTodo(current, { id }) {
     // Filter here is a transition on todos array.
-    return this().todos.filter(item => item !== todo)
+    return this().todos.filter(item => item.id !== id)
   }
 
   /**
