@@ -20,9 +20,10 @@
   },
   "dependencies": {
     "@skatejs/renderer-lit-html": "0.1.1",
-    "@skatejs/renderer-preact": "0.2.0",
+    "funcadelic": "0.2.6",
     "lit-html": "0.7.1",
-    "preact": "^8.2.7",
+    "microstates": "cowboyd/microstates.js#tmp-all-in",
+    "microstates-todomvc": "1.0.0-beta.14",
     "skatejs": "^5.1.1",
     "skatejs-web-components": "^0.0.1",
     "todomvc-app-css": "2.1.0"
@@ -41,6 +42,7 @@
     "chai": "^4.1.2",
     "esdoc": "^1.0.4",
     "eslint": "^4.13.1",
+    "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "^2.8.0",
     "find-root": "^1.1.0",
     "karma": "^1.7.1",

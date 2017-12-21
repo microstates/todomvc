@@ -7,7 +7,7 @@ module.exports = {
     browser: true,
     es6: true
   },
-  extends: ['eslint:recommended', 'plugin:import/errors', 'plugin:import/warnings'],
+  extends: ['prettier', 'plugin:import/errors', 'plugin:import/warnings'],
   plugins: ['import'],
   parserOptions: {
     ecmaFeatures: {
@@ -18,25 +18,5 @@ module.exports = {
   globals: {
     ShadyCSS: true,
     skate: true
-  },
-  rules: {
-    // Built-in Rules
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1
-      }
-    ],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    'jsx-quotes': ['error', 'prefer-double'],
-    'no-unused-vars': [
-      'error',
-      {
-        // Ignore the `h` import because JSX transforms into it
-        varsIgnorePattern: 'h'
-      }
-    ]
   }
 }
