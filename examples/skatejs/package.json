@@ -19,7 +19,9 @@
     "node": ">=6.7.0"
   },
   "dependencies": {
+    "@skatejs/renderer-lit-html": "0.1.1",
     "@skatejs/renderer-preact": "0.2.0",
+    "lit-html": "0.7.1",
     "preact": "^8.2.7",
     "skatejs": "^5.1.1",
     "skatejs-web-components": "^0.0.1",

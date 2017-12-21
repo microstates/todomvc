@@ -1,4 +1,5 @@
-import { h } from 'preact'
+import { html } from 'lit-html'
+import { unsafeHTML } from 'lit-html/lib/unsafe-html'
 
 const $template = Symbol()
 
@@ -29,11 +30,12 @@ const $template = Symbol()
  * @returns {HTMLElement|undefined} might return a `style` tag, or nothing at all
  */
 export default function style(elem, css) {
+  let style = `<style>${css}</style>`
   if (ShadyCSS.nativeShadow) {
-    return <style>{css}</style>
+    return html`${unsafeHTML(style)}`
   }
 
   const template = elem[$template] || (elem[$template] = document.createElement('template'))
-  template.innerHTML = `<style>${css}</style>`
+  template.innerHTML = style
   ShadyCSS.prepareTemplate(template, elem.localName)
 }
