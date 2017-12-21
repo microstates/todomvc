@@ -9,7 +9,7 @@ import TodoMVC from './component.js'
 define(TodoMVC)
 
 storiesOf('TodoMvc', module)
-  .add('it renders', () => <todo-mvc />)
+  .add('it renders', () => <todo-mvc name="taras" />)
   .add('it can render content into the slot', () => (
     <todo-mvc>
       <p>This is some inner content</p>

@@ -22,7 +22,8 @@
     "@skatejs/renderer-preact": "0.2.0",
     "preact": "^8.2.7",
     "skatejs": "^5.1.1",
-    "skatejs-web-components": "^0.0.1"
+    "skatejs-web-components": "^0.0.1",
+    "todomvc-app-css": "2.1.0"
   },
   "devDependencies": {
     "@skatejs/val": "^0.3.1",
