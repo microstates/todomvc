@@ -1,0 +1,9 @@
+$color: blue;
+
+.text {
+  color: $color;
+}
+
+::slotted(p) {
+  color: red;
+}

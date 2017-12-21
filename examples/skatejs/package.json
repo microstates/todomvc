@@ -1,0 +1,59 @@
+{
+  "name": "todo-mvc",
+  "version": "1.0.0",
+  "description": "`todo-mvc` custom element",
+  "author": {
+    "name": "Taras Mankovski",
+    "email": "taras@thisdot.co"
+  },
+  "scripts": {
+    "build": "webpack --config webpack/production.js -p",
+    "build-storybook": "build-storybook",
+    "build:stats": "webpack --config webpack/development.js --json | webpack-bundle-size-analyzer",
+    "lint": "eslint src test",
+    "storybook": "start-storybook -p 6006",
+    "test": "karma start",
+    "test:ci": "karma start --single-run"
+  },
+  "engines": {
+    "node": ">=6.7.0"
+  },
+  "dependencies": {
+    "@skatejs/renderer-preact": "0.2.0",
+    "preact": "^8.2.7",
+    "skatejs": "^5.1.1",
+    "skatejs-web-components": "^0.0.1"
+  },
+  "devDependencies": {
+    "@skatejs/val": "^0.3.1",
+    "@storybook/react": "^3.2.18",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babili-webpack-plugin": "^0.1.2",
+    "bore": "^2.0.1",
+    "chai": "^4.1.2",
+    "esdoc": "^1.0.4",
+    "eslint": "^4.13.1",
+    "eslint-plugin-import": "^2.8.0",
+    "find-root": "^1.1.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-webpack": "^2.0.9",
+    "mocha": "^4.0.1",
+    "node-sass": "^4.7.2",
+    "path-is-inside": "^1.0.2",
+    "raw-loader": "^0.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.10.0",
+    "webpack-bundle-size-analyzer": "^2.7.0",
+    "webpack-merge": "^4.1.1",
+    "yaml-loader": "^0.5.0"
+  }
+}
