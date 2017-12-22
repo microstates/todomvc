@@ -1,5 +1,6 @@
 import microstate from 'microstates'
 import { map } from 'funcadelic'
+import shallowEqual from 'shallowequal'
 
 export default function withMicrostate(Model, Class) {
   return class ClassWithMicrostate extends Class {
@@ -14,12 +15,14 @@ export default function withMicrostate(Model, Class) {
     }
 
     connectMicrostate(ms) {
-      this.microstate = ms
-      this.state = {
-        model: ms.state,
-        actions: map(transition => (...args) => this.connectMicrostate(transition(...args)), ms)
+      let shouldUpdate = !this.microstate || !shallowEqual(this.microstate.valueOf(), ms.valueOf())
+      if (shouldUpdate) {
+        this.microstate = ms
+        this.state = {
+          model: ms.state,
+          actions: map(transition => (...args) => this.connectMicrostate(transition(...args)), ms)
+        }
       }
-      console.log(ms.state)
     }
   }
 }

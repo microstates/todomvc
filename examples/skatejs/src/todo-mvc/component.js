@@ -14,6 +14,8 @@ const whenEnter = (truthy, falsy = noop) => e => (e.which === 13 ? truthy(e.targ
 const value = cb => e => cb(e.target.value)
 const items = count => (count === 1 ? 'item' : 'items')
 
+const { keys } = Object
+
 export default class TodoMVC extends withMicrostate(Model, withComponent(withLitHtml())) {
   static is = 'todo-mvc'
   static props = {
@@ -30,12 +32,18 @@ export default class TodoMVC extends withMicrostate(Model, withComponent(withLit
           placeholder="What needs to be done?" 
           autofocus
           value="${model.newTodo}" 
-          onkeydown=${whenEnter(() => actions.insertNewTodo(), v => actions.newTodo.set(v))}
+          onkeyup=${whenEnter(_ => actions.insertNewTodo(), v => actions.newTodo.set(v))}
           onblur=${() => actions.insertNewTodo()}
         />
       </header>
       <section class="main">
-        <input id="toggle-all" class="toggle-all" type="checkbox" />
+        <input 
+          id="toggle-all" 
+          class="toggle-all" 
+          type="checkbox" 
+          checked=${model.isAllComplete}
+          onchange=${() => actions.toggleAll()}
+        />
         <label for="toggle-all">Mark all as complete</label>
         <ul class="todo-list">
           ${repeat(
@@ -76,28 +84,29 @@ export default class TodoMVC extends withMicrostate(Model, withComponent(withLit
           <strong>${model.remainingCount}</strong> ${items(model.remainingCount)} left
         </span>
         <ul class="filters">
-          <li>
-            <a class="selected" href="#/">
-              All
-            </a>
-          </li>
-          <li>
-            <a href="#/active">Active</a>
-          </li>
-          <li>
-            <a href="#/completed">Completed</a>
-          </li>
+          ${repeat(
+            keys(model.FILTER_OPTIONS),
+            filter => filter,
+            filter => html`
+              <li>
+                <button
+                  className="${when(model.filter === filter, 'selected')}"
+                  onclick=${() => actions.filter.set(filter)}
+                >
+                  ${model.FILTER_OPTIONS[filter]}
+                </button>
+              </li>
+            `
+          )}
         </ul>
         ${when(
           model.completedCount > 0,
           html`
             <button class="clear-completed" onclick=${() => actions.clearCompleted()}>Clear completed</button>
-        `
+          `
         )}
       </footer>
     </section>
     `
   }
 }
-
-// customElements.define('todo-mvc', TodoMVC)
