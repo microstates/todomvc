@@ -7,27 +7,28 @@ import TodoItem from './TodoItem'
 export default function TodoList({ todos, actions, editText }) {
   return (
     <ul className="todo-list">
-      {todos.map(todo => (
-        <li
-          className={classnames({
-            completed: todo.completed,
-            editing: todo.editing
-          })}
-          key={todo.id}
-        >
-          {todo.editing ? (
-            <TodoTextInput
-              text={editText}
-              classes="edit"
-              onSave={actions.finishEditing}
-              onChange={text => actions.editText.set(text)}
-              onBlur={actions.finishEditing}
-            />
-          ) : (
-            <TodoItem todo={todo} actions={actions} />
-          )}
-        </li>
-      ))}
+      {todos &&
+        todos.map(todo => (
+          <li
+            className={classnames({
+              completed: todo.completed,
+              editing: todo.editing
+            })}
+            key={todo.id}
+          >
+            {todo.editing ? (
+              <TodoTextInput
+                text={editText}
+                classes="edit"
+                onSave={actions.finishEditing}
+                onChange={text => actions.editText.set(text)}
+                onBlur={actions.finishEditing}
+              />
+            ) : (
+              <TodoItem todo={todo} actions={actions} />
+            )}
+          </li>
+        ))}
     </ul>
   )
 }

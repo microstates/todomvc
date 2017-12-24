@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
@@ -8,8 +9,7 @@ export default class Footer extends Component {
     completedCount: PropTypes.number.isRequired,
     activeCount: PropTypes.number.isRequired,
     filter: PropTypes.string.isRequired,
-    onClearCompleted: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired
+    onClearCompleted: PropTypes.func.isRequired
   }
 
   renderTodoCount() {
@@ -25,16 +25,16 @@ export default class Footer extends Component {
 
   renderFilterLink(filter) {
     const title = this.props.FILTER_OPTIONS[filter]
-    const { filter: selectedFilter, onShow } = this.props
+    const { filter: selectedFilter } = this.props
 
     return (
-      <a
+      <Link
         className={classnames({ selected: filter === selectedFilter })}
         style={{ cursor: 'pointer' }}
-        onClick={() => onShow(filter)}
+        to={filter === '' ? '/' : `/?filter=${filter}`}
       >
         {title}
-      </a>
+      </Link>
     )
   }
 
@@ -54,9 +54,7 @@ export default class Footer extends Component {
     return (
       <footer className="footer">
         {this.renderTodoCount()}
-        <ul className="filters">
-          {filters.map(filter => <li key={filter}>{this.renderFilterLink(filter)}</li>)}
-        </ul>
+        <ul className="filters">{filters.map(filter => <li key={filter}>{this.renderFilterLink(filter)}</li>)}</ul>
         {this.renderClearButton()}
       </footer>
     )

@@ -11,12 +11,15 @@
     "prop-types": "^15.6.0"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "classnames": "^2.2.5",
     "funcadelic": "0.2.6",
+    "history": "4.7.2",
     "microstates": "cowboyd/microstates.js#tmp-all-in",
     "microstates-todomvc": "1.0.0-beta.14",
+    "qs": "6.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "4.2.2",
     "todomvc-app-css": "^2.1.0"
   },
   "scripts": {
