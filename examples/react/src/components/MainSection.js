@@ -20,7 +20,6 @@ export default function MainSection({ model, actions }) {
           activeCount={model.remainingCount}
           filter={model.filter}
           onClearCompleted={() => actions.clearCompleted()}
-          onShow={filter => actions.filter.set(filter)}
         />
       ) : null}
     </section>
