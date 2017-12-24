@@ -2,14 +2,20 @@ import { Component, createElement } from 'react'
 import { map } from 'funcadelic'
 import hoistStatics from 'hoist-non-react-statics'
 import microstate from 'microstates'
+import createBrowserHistory from 'history/createBrowserHistory'
 
 export default function connect(Model, WrappedComponent) {
   class Connect extends Component {
     constructor(props, context) {
       super(props, context)
 
-      this.setMicrostate(microstate(Model, props))
-      this.state = this.microstate.state
+      this.history = createBrowserHistory()
+      this.setMicrostate(
+        microstate(Model, {
+          ...props,
+          location: this.history.location
+        })
+      )
     }
 
     setMicrostate(ms) {
@@ -19,10 +25,22 @@ export default function connect(Model, WrappedComponent) {
         transition => (...args) => {
           let ms = transition(...args)
           this.setMicrostate(ms)
-          this.setState(ms.state)
+          this.setState({})
         },
         ms
       )
+    }
+
+    historyListener = location => {
+      this.actions.location.set(location)
+    }
+
+    componentWillMount() {
+      this.unlisten = this.history.listen(this.historyListener)
+    }
+
+    componentWillUnmount() {
+      this.unlisten()
     }
 
     componentWillReceiveProps(props) {
@@ -31,9 +49,10 @@ export default function connect(Model, WrappedComponent) {
 
     render() {
       return createElement(WrappedComponent, {
-        model: this.state,
+        model: this.microstate.state,
         actions: this.actions,
-        ...this.props,
+        history: this.history,
+        ...this.props
       })
     }
   }
