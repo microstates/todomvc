@@ -22,7 +22,7 @@
     "@skatejs/renderer-lit-html": "0.1.1",
     "@skatejs/sk-router": "0.2.0",
     "funcadelic": "0.2.6",
-    "lit-html": "0.7.1",
+    "lit-html": "PolymerLabs/lit-html#5742a9e5e6ae74ee91b0421bca92d90f3e2b0601",
     "microstates": "cowboyd/microstates.js#tmp-all-in",
     "microstates-todomvc": "1.0.0-beta.14",
     "shallowequal": "1.0.2",
