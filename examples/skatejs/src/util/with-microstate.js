@@ -4,25 +4,29 @@ import shallowEqual from 'shallowequal'
 
 export default function withMicrostate(Model, Class) {
   return class ClassWithMicrostate extends Class {
-    state = {
-      model: null,
-      actions: null
-    }
-    constructor() {
-      super()
+    rendering() {
+      if (!this._rendered) {
+        this.microstate = microstate(Model, this.props)
 
-      this.connectMicrostate(microstate(Model))
-    }
-
-    connectMicrostate(ms) {
-      let shouldUpdate = !this.microstate || !shallowEqual(this.microstate.valueOf(), ms.valueOf())
-      if (shouldUpdate) {
-        this.microstate = ms
         this.state = {
-          model: ms.state,
-          actions: map(transition => (...args) => this.connectMicrostate(transition(...args)), ms)
+          model: this.microstate.state,
+          actions: this.actions
         }
+        this._rendered = true
       }
+    }
+
+    get actions() {
+      return map(
+        transition => (...args) => {
+          this.microstate = transition(...args)
+          this.state = {
+            model: this.microstate.state,
+            actions: this.actions
+          }
+        },
+        this.microstate
+      )
     }
   }
 }

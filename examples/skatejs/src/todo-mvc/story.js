@@ -8,10 +8,6 @@ import TodoMVC from './component.js'
 
 define(TodoMVC)
 
-storiesOf('TodoMvc', module)
-  .add('it renders', () => <todo-mvc name="taras" />)
-  .add('it can render content into the slot', () => (
-    <todo-mvc>
-      <p>This is some inner content</p>
-    </todo-mvc>
-  ))
+let todos = [{ id: 0, text: 'Write Microstates Docs', completed: false }]
+
+storiesOf('TodoMVC', module).add('it renders', () => <todo-mvc todos={todos} />)
