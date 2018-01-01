@@ -13,7 +13,7 @@
     "test": "ember test"
   },
   "dependencies": {
-    "microstates-todomvc": "1.0.0-beta.10",
+    "microstates-todomvc": "1.0.0-beta.14",
     "navigo": "6.0.1"
   },
   "devDependencies": {
