@@ -5,12 +5,19 @@ import babel from 'rollup-plugin-babel'
 const env = process.env.NODE_ENV
 const config = {
   input: 'build/todomvc.es.js',
-  plugins: []
+  plugins: [],
+  external: ['microstates'],
+  output: {
+    name: 'TodoMVCModel',
+    exports: 'named',
+    globals: {
+      microstates: 'MS'
+    }
+  }
 }
 
 if (env === 'es' || env === 'cjs') {
-  config.output = { format: env }
-  config.external = ['microstates']
+  config.output.format = env
   config.plugins.push(
     babel({
       babelrc: false,
@@ -19,9 +26,8 @@ if (env === 'es' || env === 'cjs') {
   )
 }
 
-if (env === 'development' || env === 'production') {
-  config.output = { format: 'umd' }
-  config.name = 'MicrostatesTodoMVC'
+if (env === 'umd') {
+  config.output.format = 'umd'
   config.plugins.push(
     nodeResolve({
       jsnext: true
