@@ -11,7 +11,7 @@
     "build-storybook": "build-storybook",
     "build:stats": "webpack --config webpack/development.js --json | webpack-bundle-size-analyzer",
     "lint": "eslint src test",
-    "storybook": "start-storybook -p 6006",
+    "start": "start-storybook -p 6006",
     "test": "karma start",
     "test:ci": "karma start --single-run"
   },
@@ -24,7 +24,7 @@
     "funcadelic": "0.2.6",
     "lit-html": "PolymerLabs/lit-html#5742a9e5e6ae74ee91b0421bca92d90f3e2b0601",
     "microstates": "cowboyd/microstates.js#tmp-all-in",
-    "microstates-todomvc": "1.0.0-beta.14",
+    "microstates-todomvc": "1.0.0-beta.16",
     "shallowequal": "1.0.2",
     "skatejs": "^5.1.1",
     "skatejs-web-components": "^0.0.1",

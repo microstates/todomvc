@@ -1,15 +1,18 @@
 {
   "name": "microstates-todomvc",
-  "version": "1.0.0-beta.14",
+  "version": "1.0.0-beta.16",
   "description": "Microstates Model for TodoMVC Component",
-  "main": "./build/index.js",
-  "module": "./build/index.js",
-  "jsnext:main": "./build/index.js",
+  "main": "build/todomvc.cjs.js",
+  "module": "build/todomvc.es.js",
+  "jsnext:main": "build/todomvc.es.js",
   "files": ["build"],
   "scripts": {
     "test": "mocha --require babel-core/register tests.js",
     "test:watch": "npm test -- --watch",
-    "build": "cross-env BABEL_ENV=es babel index.js --out-dir build",
+    "build": "mkdirp build && npm run build:es && npm run build:cjs",
+    "build:es":
+      "babel index.js --no-babelrc --plugins=transform-class-properties,transform-object-rest-spread --out-file build/todomvc.es.js",
+    "build:cjs": "cross-env NODE_ENV=cjs rollup -c -o build/todomvc.cjs.js",
     "prepublish": "npm run test && npm run build"
   },
   "repository": {
@@ -29,11 +32,20 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
+    "babel-plugin-external-helpers": "6.22.0",
+    "babel-plugin-syntax-class-properties": "6.13.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-env": "1.6.1",
+    "babel-preset-es2015-rollup": "3.0.0",
     "chai": "4.1.2",
     "cross-env": "5.1.1",
-    "mocha": "4.0.1"
+    "mkdirp": "0.5.1",
+    "mocha": "4.0.1",
+    "rollup": "0.53.3",
+    "rollup-plugin-babel": "3.0.3",
+    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-replace": "2.0.0"
   }
 }
