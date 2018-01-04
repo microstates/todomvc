@@ -17,15 +17,16 @@
       <input id="toggle-all" class="toggle-all" type="checkbox" checked={{ms.state.isAllComplete}} onchange={{action updateState ms.toggleAll}}>
       <label for="toggle-all" title="Mark all as complete">Mark all as complete</label>
 
-
       <ul class="todo-list">
         {{#each ms.state.editableTodos key="id" as |todo| }}
           <TodoItem @todo={{todo}}
                     @editText={{ms.state.editText}}
+
                     @updateEditText={{action updateState ms.editText.set}}
                     @startEdit={{action updateState ms.startEditing}}
                     @finishEdit={{action updateState ms.finishEditing}}
                     @abandonEdit={{action updateState ms.abandonEditing}}
+
                     @onRemove={{action updateState ms.deleteTodo}}
                     @onToggle={{action updateState ms.toggleTodo}} />
         {{/each}}
@@ -34,7 +35,6 @@
     </section>
 
     <footer class="footer">
-
       <span class="todo-count"><strong>{{ms.state.remainingCount}}</strong> {{if (eq ms.state.remainingCount 1) "item" "items"}} left</span>
 
       <ul class="filters">
@@ -49,8 +49,11 @@
     </footer>
 
   {{/if}}
+
 </section>
 
+{{#if ms.state.hasTodos}}
 <footer class="info">
   <p>Double-click to edit a todo</p>
 </footer>
+{{/if}}
