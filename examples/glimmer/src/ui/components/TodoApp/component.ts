@@ -12,23 +12,22 @@ export default class TodoApp extends Component {
 
   filterStates = filterStates;
 
+  private localStorageKey = 'glimmer:todoDB';
+
   constructor(options) {
     super(options);
 
+    let todos = [];
+
+    const storeValue = localStorage.getItem(this.localStorageKey);
+
+    if (storeValue) {
+      todos = JSON.parse(storeValue).todos;
+    }
+
     this.ms = microstates(TodoModel, {
       filter: SHOW_ALL,
-      todos: [
-        {
-          id: 1,
-          text: 'Write TodoMVC microstate',
-          completed: true
-        },
-        {
-          id: 2,
-          text: 'Write a sample glimmer app',
-          completed: false
-        }
-      ]
+      todos
     });
 
     const updateFilter = (text = SHOW_ALL) => this.updateState(this.ms.filter.set, text);
@@ -58,6 +57,9 @@ export default class TodoApp extends Component {
 
   toggleAll = () => this.updateState(this.ms.toggleAll);
 
-  updateState = (fn, args?) => (this.ms = fn(args));
+  updateState = (fn, args?) => {
+    this.ms = fn(args);
+    localStorage.setItem(this.localStorageKey, JSON.stringify({ todos: this.ms.state.todos }));
+  }
 
 }
