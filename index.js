@@ -1,8 +1,8 @@
-import * as MS from "microstates";
+import * as MS from 'microstates'
 
-export const SHOW_ALL = "";
-export const SHOW_COMPLETED = "show_completed";
-export const SHOW_ACTIVE = "show_active";
+export const SHOW_ALL = ''
+export const SHOW_COMPLETED = 'show_completed'
+export const SHOW_ACTIVE = 'show_active'
 
 /**
  * TodoMVC is a Microstate model.
@@ -31,41 +31,41 @@ export default class TodoMVC {
    * Contains array of todo items
    * @type Array
    */
-  todos = MS.Array;
+  todos = MS.Array
 
   /**
    * Text value of the new todo input field
    * @type String
    */
-  newTodo = MS.String;
+  newTodo = MS.String
 
   /**
    * Todo item that is currently being edited
    * @type Object
    */
-  editing = MS.Object;
+  editing = MS.Object
 
   /**
    * Text value of the todo item that's being edited
    * @type String
    */
-  editText = MS.String;
+  editText = MS.String
 
   /**
    * The current filter applied to the todo items
    * @type String
    */
-  filter = MS.String;
+  filter = MS.String
 
   /**
    * All possible filter options
    * @type Object
    */
   FILTER_OPTIONS = {
-    [SHOW_ALL]: "All",
-    [SHOW_ACTIVE]: "Active",
-    [SHOW_COMPLETED]: "Completed"
-  };
+    [SHOW_ALL]: 'All',
+    [SHOW_ACTIVE]: 'Active',
+    [SHOW_COMPLETED]: 'Completed'
+  }
 
   /**
    * Getters
@@ -83,7 +83,7 @@ export default class TodoMVC {
    */
   get completedCount() {
     // in computed properties, `this` references state object which has composed state values on it.
-    return this.todos.filter(({ completed }) => completed).length;
+    return this.todos.filter(({ completed }) => completed).length
   }
 
   /**
@@ -91,7 +91,7 @@ export default class TodoMVC {
    * @type Number
    */
   get nextId() {
-    return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0) + 1;
+    return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0) + 1
   }
 
   /**
@@ -99,7 +99,7 @@ export default class TodoMVC {
    * @type Number
    */
   get remainingCount() {
-    return this.todos.length - this.completedCount;
+    return this.todos.length - this.completedCount
   }
 
   /**
@@ -107,7 +107,7 @@ export default class TodoMVC {
    * @type Boolean
    */
   get isAllComplete() {
-    return this.todos.length > 0 && this.remainingCount === 0;
+    return this.todos.length > 0 && this.remainingCount === 0
   }
 
   /**
@@ -117,12 +117,20 @@ export default class TodoMVC {
   get filteredTodos() {
     switch (this.filter) {
       case SHOW_ALL:
-        return this.todos;
+        return this.todos
       case SHOW_COMPLETED:
-        return this.todos.filter(({ completed }) => completed);
+        return this.todos.filter(({ completed }) => completed)
       case SHOW_ACTIVE:
-        return this.todos.filter(({ completed }) => !completed);
+        return this.todos.filter(({ completed }) => !completed)
     }
+  }
+
+  /**
+   * Filtered todo items decorated with editing status relative to todo that's being edited
+   * @type Array
+   */
+  get editableTodos() {
+    return this.filteredTodos.map(todo => ({ ...todo, editing: todo.id === this.editing.id }))
   }
 
   /**
@@ -130,7 +138,7 @@ export default class TodoMVC {
    * @type Boolean
    */
   get hasTodos() {
-    return this.todos.length > 0;
+    return this.todos.length > 0
   }
 
   /**
@@ -150,7 +158,7 @@ export default class TodoMVC {
    * @param {TodoMVC} current state
    * @param {Object} todo
    */
-  toggleTodo(current, todo) {
+  toggleTodo(current, { id }) {
     /**
      * microstates doesn't support transitioning state that is composed into an array (yet).
      * We can transition the array, but not values in that array. We're planning
@@ -158,10 +166,11 @@ export default class TodoMVC {
      *
      * Find the todo that we want to update and replace it with new item that has completed true.
      */
+    let todo = current.todos.find(todo => todo.id === id)
     return this().todos.replace(todo, {
       ...todo,
       completed: !todo.completed
-    });
+    })
   }
 
   /**
@@ -171,11 +180,11 @@ export default class TodoMVC {
    * @param {Object} todo
    * @param {String} text
    */
-  updateTodo(current, todo, text = "") {
+  updateTodo(current, todo, text = '') {
     if (text.length === 0) {
-      return this().deleteTodo(todo);
+      return this().deleteTodo(todo)
     } else {
-      return this().editTodo(todo, text);
+      return this().editTodo(todo, text)
     }
   }
 
@@ -185,12 +194,13 @@ export default class TodoMVC {
    * @param {Object} todo
    * @param {String} text
    */
-  editTodo(current, todo, text) {
+  editTodo(current, { id }, text) {
     // Find the todo that we want to update and replace it with new item with changed text.
+    let todo = current.todos.find(todo => todo.id === id)
     return this().todos.replace(todo, {
       ...todo,
       text
-    });
+    })
   }
 
   /**
@@ -198,9 +208,9 @@ export default class TodoMVC {
    * @param {TodoMVC} current
    * @param {Object} todo
    */
-  deleteTodo(current, todo) {
+  deleteTodo(current, { id }) {
     // Filter here is a transition on todos array.
-    return this().todos.filter(item => item !== todo);
+    return this().todos.filter(item => item.id !== id)
   }
 
   /**
@@ -214,7 +224,7 @@ export default class TodoMVC {
       text,
       id: current.nextId,
       completed: false
-    });
+    })
   }
 
   /**
@@ -224,10 +234,9 @@ export default class TodoMVC {
   finishEditing({ editing, editText }) {
     return this()
       .updateTodo(editing, editText)
-      .editText.set("")
-      .editing.set(null);
+      .editText.set('')
+      .editing.set(null)
   }
-
 
   /**
    * Abandon editing a todo
@@ -247,7 +256,7 @@ export default class TodoMVC {
   startEditing(current, todo) {
     return this()
       .editing.set(todo)
-      .editText.set(todo.text);
+      .editText.set(todo.text)
   }
 
   /**
@@ -256,13 +265,13 @@ export default class TodoMVC {
    * @param {TodoMVC} current
    */
   insertNewTodo(current) {
-    let { newTodo } = current;
+    let { newTodo } = current
     if (newTodo.length === 0) {
-      return current;
+      return current
     } else {
       return this()
         .addTodo(newTodo)
-        .newTodo.set("");
+        .newTodo.set('')
     }
   }
 
@@ -270,7 +279,7 @@ export default class TodoMVC {
    * Remove all items that have completed status
    */
   clearCompleted() {
-    return this().todos.filter(({ completed }) => !completed);
+    return this().todos.filter(({ completed }) => !completed)
   }
 
   /**
@@ -279,6 +288,6 @@ export default class TodoMVC {
    * @param {TodoMVC} current
    */
   toggleAll({ isAllComplete }) {
-    return this().todos.map(todo => ({ ...todo, completed: !isAllComplete }));
+    return this().todos.map(todo => ({ ...todo, completed: !isAllComplete }))
   }
 }
