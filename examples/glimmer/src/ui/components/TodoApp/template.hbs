@@ -14,8 +14,9 @@
 
     <section class="main">
 
-      <input id="toggle-all" class="toggle-all" type="checkbox">
-      <label for="toggle-all">Mark all as complete</label>
+      <input id="toggle-all" class="toggle-all" type="checkbox" checked={{ms.state.isAllComplete}} onchange={{action toggleAll}}>
+      <label for="toggle-all" title="Mark all as complete">Mark all as complete</label>
+
 
       <ul class="todo-list">
         {{#each ms.state.filteredTodos key="id" as |todo| }}

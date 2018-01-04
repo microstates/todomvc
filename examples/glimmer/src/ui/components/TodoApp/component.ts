@@ -52,9 +52,8 @@ export default class TodoApp extends Component {
     event.target.value = '';
   }
 
+  toggleAll = () => this.updateState(this.ms.toggleAll);
+
   updateState = (fn, ...args) => (this.ms = fn(args));
 
-  didUpdate() {
-    console.log('🔥');
-  }
 }
