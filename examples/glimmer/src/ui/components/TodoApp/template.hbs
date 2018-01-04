@@ -19,8 +19,13 @@
 
 
       <ul class="todo-list">
-        {{#each ms.state.filteredTodos key="id" as |todo| }}
+        {{#each ms.state.editableTodos key="id" as |todo| }}
           <TodoItem @todo={{todo}}
+                    @editText={{ms.state.editText}}
+                    @updateEditText={{action updateState ms.editText.set}}
+                    @startEdit={{action updateState ms.startEditing}}
+                    @finishEdit={{action updateState ms.finishEditing}}
+                    @abandonEdit={{action updateState ms.abandonEditing}}
                     @onRemove={{action updateState ms.deleteTodo}}
                     @onToggle={{action updateState ms.toggleTodo}} />
         {{/each}}
