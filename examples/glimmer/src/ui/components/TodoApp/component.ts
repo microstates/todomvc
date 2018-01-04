@@ -52,6 +52,8 @@ export default class TodoApp extends Component {
     event.target.value = '';
   }
 
+  deleteTodo = (todo) => this.updateState(this.ms.deleteTodo, todo);
+
   toggleTodo = (todo) =>  this.updateState(this.ms.toggleTodo, todo);
 
   toggleAll = () => this.updateState(this.ms.toggleAll);

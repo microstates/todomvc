@@ -2,7 +2,7 @@
   <div class="view">
     <input class="toggle" type="checkbox" checked={{if @todo.completed 'checked'}} onchange={{action @onToggle @todo}}>
     <label>{{@todo.text}}</label>
-    <button class="destroy"></button>
+    <button class="destroy" onclick={{action @onRemove @todo}}></button>
   </div>
   <input class="edit" value={{@todo.text}}>
 </li>
