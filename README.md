@@ -5,7 +5,7 @@ a single state model can be consumed by different frameworks without modifying o
 
 ## How it works?
 
-For each framework, a _connect_ utility wraps a component and binds the TodoMVC Model to the component.
+For each framework, a _connect_ utility wraps a component and binds the TodoMVC Model to the root component.
 The connect utility makes `model` and `actions` available to the wrapped component. `model` contains state
 for the current value. `actions` are state transitions wrapped in framework specific code that'll cause the
 component to update.
@@ -18,7 +18,7 @@ component to update.
   * [Connect Helper](examples/react/src/utils/connect.js)
 * Skate.js
   * [Component](examples/skatejs/src/todo-mvc/component.js)
-  * [Connect Helper](examples/skatejs/src/utils/with-microstate.js)
+  * [Connect Helper](examples/skatejs/src/util/with-microstate.js)
 * Vue.js
   * [Component](examples/vue/src/components/Todos.vue)
   * [Connect Helper](examples/vue/src/utils/connect.js)
