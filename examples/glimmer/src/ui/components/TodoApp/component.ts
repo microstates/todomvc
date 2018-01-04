@@ -55,12 +55,6 @@ export default class TodoApp extends Component {
     event.target.value = '';
   }
 
-  deleteTodo = (todo) => this.updateState(this.ms.deleteTodo, todo);
-
-  toggleTodo = (todo) =>  this.updateState(this.ms.toggleTodo, todo);
-
-  toggleAll = () => this.updateState(this.ms.toggleAll);
-
   updateState = (fn, args?) => {
     this.ms = fn(args);
     localStorage.setItem(this.localStorageKey, JSON.stringify({ todos: this.ms.state.todos }));

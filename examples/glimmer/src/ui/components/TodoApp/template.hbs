@@ -14,15 +14,15 @@
 
     <section class="main">
 
-      <input id="toggle-all" class="toggle-all" type="checkbox" checked={{ms.state.isAllComplete}} onchange={{action toggleAll}}>
+      <input id="toggle-all" class="toggle-all" type="checkbox" checked={{ms.state.isAllComplete}} onchange={{action updateState ms.toggleAll}}>
       <label for="toggle-all" title="Mark all as complete">Mark all as complete</label>
 
 
       <ul class="todo-list">
         {{#each ms.state.filteredTodos key="id" as |todo| }}
           <TodoItem @todo={{todo}}
-                    @onRemove={{action deleteTodo}}
-                    @onToggle={{action toggleTodo}} />
+                    @onRemove={{action updateState ms.deleteTodo}}
+                    @onToggle={{action updateState ms.toggleTodo}} />
         {{/each}}
       </ul>
 
