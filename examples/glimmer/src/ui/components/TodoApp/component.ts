@@ -1,43 +1,48 @@
-import microstates from 'microstates';
-import Component, { tracked } from '@glimmer/component';
-import TodoModel, { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from 'microstates-todomvc';
-import Navigo from 'navigo';
-import { ENTER } from '../../../utils/keys';
+import microstates from 'microstates'
+import Component, { tracked } from '@glimmer/component'
+import TodoModel, {
+  SHOW_ALL,
+  SHOW_COMPLETED,
+  SHOW_ACTIVE
+} from 'microstates-todomvc'
+import Navigo from 'navigo'
+import { ENTER } from '../../../utils/keys'
 
-const router = new Navigo(null, true);
-const filterStates = { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE };
+const router = new Navigo(null, true)
+const filterStates = { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE }
 
 export default class TodoApp extends Component {
   /** Microstate */
-  @tracked ms;
+  @tracked ms
 
-  filterStates = filterStates;
+  filterStates = filterStates
 
-  private localStorageKey = 'glimmer:todoDB';
+  private localStorageKey = 'glimmer:todoDB'
 
   constructor(options) {
-    super(options);
+    super(options)
 
     this.ms = microstates(TodoModel, {
       filter: SHOW_ALL,
       todos: this.getTodosFromLocalStore()
-    });
+    })
 
     this.setupRouter()
   }
 
   getTodosFromLocalStore() {
-    let todos = [];
+    let todos = []
 
-    const storeValue = localStorage.getItem(this.localStorageKey);
+    const storeValue = localStorage.getItem(this.localStorageKey)
     if (storeValue) {
-      todos = JSON.parse(storeValue).todos;
+      todos = JSON.parse(storeValue).todos
     }
     return todos
   }
 
   setupRouter() {
-    const updateFilter = (text = SHOW_ALL) => this.updateState(this.ms.filter.set, text);
+    const updateFilter = (text = SHOW_ALL) =>
+      this.updateState(this.ms.filter.set, text)
 
     router
       .on({
@@ -46,21 +51,23 @@ export default class TodoApp extends Component {
         '/completed': () => updateFilter(SHOW_COMPLETED)
       })
       .notFound(updateFilter)
-      .resolve();
-  };
+      .resolve()
+  }
 
   addTodo(event) {
-    const { which, target: { value: newTodoText } } = event;
+    const { which, target: { value: newTodoText } } = event
     if (which !== ENTER) {
-      return;
+      return
     }
-    this.updateState(this.ms.addTodo, newTodoText);
-    event.target.value = '';
+    this.updateState(this.ms.addTodo, newTodoText)
+    event.target.value = ''
   }
 
   updateState(fn, args?) {
-    this.ms = fn(args);
-    localStorage.setItem(this.localStorageKey, JSON.stringify({ todos: this.ms.state.todos }));
+    this.ms = fn(args)
+    localStorage.setItem(
+      this.localStorageKey,
+      JSON.stringify({ todos: this.ms.state.todos })
+    )
   }
-
 }

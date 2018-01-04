@@ -6,13 +6,7 @@
     "inlineSources": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "types": [
-      "qunit"
-    ]
+    "types": ["qunit"]
   },
-  "exclude": [
-    "node_modules",
-    "tmp",
-    "dist"
-  ]
+  "exclude": ["node_modules", "tmp", "dist"]
 }
