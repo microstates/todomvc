@@ -1,18 +1,17 @@
 {
   "name": "microstates-todomvc",
-  "version": "1.0.0-beta.17",
+  "version": "1.0.0-beta.18",
   "description": "Microstates Model for TodoMVC Component",
   "main": "build/todomvc.cjs.js",
   "module": "build/todomvc.es.js",
   "jsnext:main": "build/todomvc.es.js",
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "scripts": {
     "test": "mocha --require babel-core/register tests.js",
     "test:watch": "npm test -- --watch",
     "build": "mkdirp build && npm run build:es && npm run build:cjs && npm run build:umd",
-    "build:es": "babel index.js --no-babelrc --plugins=transform-class-properties,transform-object-rest-spread --out-file build/todomvc.es.js",
+    "build:es":
+      "babel index.js --no-babelrc --plugins=transform-class-properties,transform-object-rest-spread --out-file build/todomvc.es.js",
     "build:cjs": "cross-env NODE_ENV=cjs rollup -c -o build/todomvc.cjs.js",
     "build:umd": "cross-env NODE_ENV=umd rollup -c -o build/todomvc.js",
     "prepublish": "npm run test && npm run build"
@@ -21,10 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/microstates/todomvc.git"
   },
-  "keywords": [
-    "microstates",
-    "todomvc"
-  ],
+  "keywords": ["microstates", "todomvc"],
   "author": "Taras Mankovski <taras@thisdot.co>",
   "license": "MIT",
   "bugs": {
