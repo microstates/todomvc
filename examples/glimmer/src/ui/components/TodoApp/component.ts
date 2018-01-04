@@ -7,42 +7,28 @@ import TodoModel, {
 } from 'microstates-todomvc'
 import Navigo from 'navigo'
 import { ENTER } from '../../../utils/keys'
+import withMicrostate from '../../../utils/with-microstates';
 
 const router = new Navigo(null, true)
 const filterStates = { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE }
 
-export default class TodoApp extends Component {
-  /** Microstate */
-  @tracked ms
+export default class TodoApp extends withMicrostate(TodoModel, Component) {
+
+  static props = {
+    filter: SHOW_ALL,
+    todos: []
+  }
 
   filterStates = filterStates
 
-  private localStorageKey = 'glimmer:todoDB'
-
   constructor(options) {
     super(options)
-
-    this.ms = microstates(TodoModel, {
-      filter: SHOW_ALL,
-      todos: this.getTodosFromLocalStore()
-    })
-
     this.setupRouter()
   }
 
-  getTodosFromLocalStore() {
-    let todos = []
-
-    const storeValue = localStorage.getItem(this.localStorageKey)
-    if (storeValue) {
-      todos = JSON.parse(storeValue).todos
-    }
-    return todos
-  }
-
   setupRouter() {
-    const updateFilter = (text = SHOW_ALL) =>
-      this.updateState(this.ms.filter.set, text)
+
+    const updateFilter = (text = SHOW_ALL) => this.actions.filter.set(text);
 
     router
       .on({
@@ -59,15 +45,8 @@ export default class TodoApp extends Component {
     if (which !== ENTER) {
       return
     }
-    this.updateState(this.ms.addTodo, newTodoText)
+    this.actions.addTodo(newTodoText);
     event.target.value = ''
   }
 
-  updateState(fn, args?) {
-    this.ms = fn(args)
-    localStorage.setItem(
-      this.localStorageKey,
-      JSON.stringify({ todos: this.ms.state.todos })
-    )
-  }
 }

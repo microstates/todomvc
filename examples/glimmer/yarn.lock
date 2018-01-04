@@ -4207,15 +4207,15 @@ micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
-microstates-todomvc@1.0.0-beta.17:
-  version "1.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/microstates-todomvc/-/microstates-todomvc-1.0.0-beta.17.tgz#68ae8d367c9840ec7dd563e20c9b70ea94b89da0"
+microstates-todomvc@1.0.0-beta.18:
+  version "1.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/microstates-todomvc/-/microstates-todomvc-1.0.0-beta.18.tgz#4b558689cab5cc2430fc4286ff2bd4c95007ceaa"
   dependencies:
-    microstates "0.3.0"
+    microstates "github:cowboyd/microstates.js#tmp-all-in"
 
-microstates@0.3.0:
+"microstates@github:cowboyd/microstates.js#tmp-all-in":
   version "0.3.0"
-  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.3.0.tgz#cd14ca7da2ade205e32748c55c17ee17a824c7df"
+  resolved "https://codeload.github.com/cowboyd/microstates.js/tar.gz/edf43e6d4bd2e4c6ed13bb6fe62ec1cc872e7abe"
   dependencies:
     "@std/esm" "^0.14.0"
     funcadelic "^0.2.6"
@@ -5278,6 +5278,10 @@ setprototypeof@1.0.3:
 setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
+
+shallowequal@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.0.2.tgz#1561dbdefb8c01408100319085764da3fcf83f8f"
 
 shebang-command@^1.2.0:
   version "1.2.0"

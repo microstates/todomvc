@@ -10,41 +10,41 @@
           onkeydown={{action addTodo}} />
   </header>
 
-  {{#if ms.state.hasTodos}}
+  {{#if model.hasTodos}}
 
     <section class="main">
 
-      <input id="toggle-all" class="toggle-all" type="checkbox" checked={{ms.state.isAllComplete}} onchange={{action updateState ms.toggleAll}}>
+      <input id="toggle-all" class="toggle-all" type="checkbox" checked={{model.isAllComplete}} onchange={{action actions.toggleAll}}>
       <label for="toggle-all" title="Mark all as complete">Mark all as complete</label>
 
       <ul class="todo-list">
-        {{#each ms.state.editableTodos key="id" as |todo| }}
+        {{#each model.editableTodos key="id" as |todo| }}
           <TodoItem @todo={{todo}}
-                    @editText={{ms.state.editText}}
+                    @editText={{model.editText}}
 
-                    @updateEditText={{action updateState ms.editText.set}}
-                    @startEdit={{action updateState ms.startEditing}}
-                    @finishEdit={{action updateState ms.finishEditing}}
-                    @abandonEdit={{action updateState ms.abandonEditing}}
+                    @updateEditText={{action actions.editText.set}}
+                    @startEdit={{action actions.startEditing}}
+                    @finishEdit={{action actions.finishEditing}}
+                    @abandonEdit={{action actions.abandonEditing}}
 
-                    @onRemove={{action updateState ms.deleteTodo}}
-                    @onToggle={{action updateState ms.toggleTodo}} />
+                    @onRemove={{action actions.deleteTodo}}
+                    @onToggle={{action actions.toggleTodo}} />
         {{/each}}
       </ul>
 
     </section>
 
     <footer class="footer">
-      <span class="todo-count"><strong>{{ms.state.remainingCount}}</strong> {{if (eq ms.state.remainingCount 1) "item" "items"}} left</span>
+      <span class="todo-count"><strong>{{model.remainingCount}}</strong> {{if (eq model.remainingCount 1) "item" "items"}} left</span>
 
       <ul class="filters">
-        <li><a href="#/" class="{{if (eq ms.state.filter filterStates.SHOW_ALL) "selected"}}">All</a></li>
-          <li><a href="#/active" class="{{if (eq ms.state.filter filterStates.SHOW_ACTIVE) "selected"}}">Active</a></li>
-          <li><a href="#/completed" class="{{if (eq ms.state.filter filterStates.SHOW_COMPLETED) "selected"}}">Completed</a></li>
+        <li><a href="#/" class="{{if (eq model.filter filterStates.SHOW_ALL) "selected"}}">All</a></li>
+          <li><a href="#/active" class="{{if (eq model.filter filterStates.SHOW_ACTIVE) "selected"}}">Active</a></li>
+          <li><a href="#/completed" class="{{if (eq model.filter filterStates.SHOW_COMPLETED) "selected"}}">Completed</a></li>
       </ul>
 
-      {{#if ms.state.completedCount}}
-        <button class="clear-completed" onclick={{action updateState ms.clearCompleted}}>Clear completed</button>
+      {{#if model.completedCount}}
+        <button class="clear-completed" onclick={{action actions.clearCompleted}}>Clear completed</button>
       {{/if}}
     </footer>
 
@@ -52,7 +52,7 @@
 
 </section>
 
-{{#if ms.state.hasTodos}}
+{{#if model.hasTodos}}
 <footer class="info">
   <p>Double-click to edit a todo</p>
 </footer>

@@ -13,8 +13,9 @@
     "test": "ember test"
   },
   "dependencies": {
-    "microstates-todomvc": "1.0.0-beta.17",
-    "navigo": "6.0.2"
+    "microstates-todomvc": "1.0.0-beta.18",
+    "navigo": "6.0.2",
+    "shallowequal": "1.0.2"
   },
   "devDependencies": {
     "@glimmer/application": "^0.8.0",
