@@ -20,7 +20,7 @@
 
       <ul class="todo-list">
         {{#each ms.state.filteredTodos key="id" as |todo| }}
-          <TodoItem @todo={{todo}} />
+          <TodoItem @todo={{todo}} @onToggle={{action toggleTodo}} />
         {{/each}}
       </ul>
 
