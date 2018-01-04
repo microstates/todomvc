@@ -30,6 +30,10 @@ export default class TodoApp extends Component {
       todos
     });
 
+    this.setupRouter()
+  }
+
+  setupRouter = () => {
     const updateFilter = (text = SHOW_ALL) => this.updateState(this.ms.filter.set, text);
 
     router
@@ -40,7 +44,7 @@ export default class TodoApp extends Component {
       })
       .notFound(updateFilter)
       .resolve();
-  }
+  };
 
   addTodo(event) {
     const { code, target: { value: newTodoText } } = event;
