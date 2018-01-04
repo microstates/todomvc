@@ -18,19 +18,22 @@ export default class TodoApp extends Component {
   constructor(options) {
     super(options);
 
+    this.ms = microstates(TodoModel, {
+      filter: SHOW_ALL,
+      todos: this.getTodosFromLocalStore()
+    });
+
+    this.setupRouter()
+  }
+
+  getTodosFromLocalStore() {
     let todos = [];
 
     const storeValue = localStorage.getItem(this.localStorageKey);
     if (storeValue) {
       todos = JSON.parse(storeValue).todos;
     }
-
-    this.ms = microstates(TodoModel, {
-      filter: SHOW_ALL,
-      todos
-    });
-
-    this.setupRouter()
+    return todos
   }
 
   setupRouter() {
