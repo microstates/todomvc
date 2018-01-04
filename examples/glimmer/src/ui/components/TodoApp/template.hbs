@@ -2,19 +2,21 @@
 
   <header class="header">
     <h1>Todos</h1>
-    <input type="text" 
-          class="new-todo" 
-          autofocus 
-          autocomplete="off" 
+    <input type="text"
+          class="new-todo"
+          autofocus
+          autocomplete="off"
           placeholder="What needs to be done?"
           onkeydown={{action addTodo}} />
   </header>
-  
+
   {{#if ms.state.hasTodos}}
-   
+
     <section class="main">
+
       <input id="toggle-all" class="toggle-all" type="checkbox">
       <label for="toggle-all">Mark all as complete</label>
+
       <ul class="todo-list">
         <!-- These are here just to show the structure of the list items -->
         <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
@@ -31,10 +33,10 @@
 
       </ul>
     </section>
-    
+
     <footer class="footer">
 
-      <span class="todo-count"><strong>{{ms.state.remainingCount}}</strong> items left</span>
+      <span class="todo-count"><strong>{{ms.state.remainingCount}}</strong> {{if (eq ms.state.remainingCount 1) "item" "items"}} left</span>
 
       <ul class="filters">
         <li><a href="#/" class="{{if (eq ms.state.filter filterStates.SHOW_ALL) "selected"}}">All</a></li>
