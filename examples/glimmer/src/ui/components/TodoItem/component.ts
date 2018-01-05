@@ -5,9 +5,7 @@ export default class TodoItem extends Component {
   didUpdate() {
     if (this.args.todo.editing) {
       requestAnimationFrame(() => {
-        let input = this.element.querySelector(
-          'input[type="text"]'
-        ) as HTMLElement
+        let input = this.element.querySelector('input[type="text"]') as HTMLElement
         input.focus()
       })
     }
