@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TodoTextInput from './TodoTextInput'
+import TodoMVC from '../models';
 
-export default function Header({ newTodo, actions }) {
+export default function Header({ model }) {
   return (
     <header className="header">
       <h1>todos</h1>
       <TodoTextInput
-        text={newTodo}
+        text={model.state.newTodo}
         classes="new-todo"
-        onSave={actions.insertNewTodo}
-        onBlur={actions.insertNewTodo}
-        onChange={text => actions.newTodo.set(text)}
+        onSave={model.insertNewTodo}
+        onBlur={model.insertNewTodo}
+        onChange={model.newTodo.set}
         placeholder="What needs to be done?"
       />
     </header>
@@ -19,8 +20,7 @@ export default function Header({ newTodo, actions }) {
 }
 
 Header.propTypes = {
-  newTodo: PropTypes.string.isRequired,
-  actions: PropTypes.shape({
-    insertNewTodo: PropTypes.func.isRequired
-  })
+  model: PropTypes.shape({
+    state: PropTypes.instanceOf(TodoMVC)
+  }),
 }

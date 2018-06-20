@@ -1,36 +1,32 @@
-import React from 'react'
-import { shape, array, func } from 'prop-types'
-import TodoList from './TodoList'
-import Footer from './Footer'
+import React from "react";
+import PropTypes from "prop-types";
+import TodoList from "./TodoList";
+import Footer from "./Footer";
+import TodoMVC from "../models";
 
-export default function MainSection({ model, actions }) {
+export default function MainSection({ model }) {
   return (
     <section className="main">
-      {model.hasTodos ? (
+      {model.state.hasTodos ? (
         <span>
-          <input className="toggle-all" type="checkbox" checked={model.isAllComplete} />
-          <label onClick={actions.toggleAll} />
+          <input
+            className="toggle-all"
+            type="checkbox"
+            checked={model.state.isAllComplete}
+          />
+          <label onClick={model.toggleAll} />
         </span>
       ) : null}
-      <TodoList todos={model.editableTodos} editText={model.editText} actions={actions} />
-      {model.hasTodos ? (
-        <Footer
-          FILTER_OPTIONS={model.FILTER_OPTIONS}
-          completedCount={model.completedCount}
-          activeCount={model.remainingCount}
-          filter={model.filter}
-          onClearCompleted={() => actions.clearCompleted()}
-        />
+      <TodoList model={model} />
+      {model.state.hasTodos ? (
+        <Footer model={model} />
       ) : null}
     </section>
-  )
+  );
 }
 
 MainSection.propTypes = {
-  model: shape({
-    todos: array.isRequired
-  }),
-  actions: shape({
-    clearCompleted: func.isRequired
+  model: PropTypes.shape({
+    state: PropTypes.instanceOf(TodoMVC)
   })
-}
+};

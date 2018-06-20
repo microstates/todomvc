@@ -1,20 +1,18 @@
-import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import React from "react";
+import State from "@microstates/react";
+import TodoMVC from "../models";
+import Header from './Header';
+import MainSection from './MainSection';
 
-import Model from 'microstates-todomvc'
-import connect from '../utils/connect'
-import TodoMVC from './TodoMVC'
-
-function App({ model, actions, history }) {
+export default function App({ value }) {
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path="*">
-          <TodoMVC model={model} actions={actions} />
-        </Route>
-      </Switch>
-    </Router>
-  )
+    <State type={TodoMVC} value={value}>
+      {model => (
+        <div>
+          <Header model={model} />
+          <MainSection model={model} />
+        </div>
+      )}
+    </State>
+  );
 }
-
-export default connect(Model, App)

@@ -1,40 +1,39 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import TodoMVC, { FILTER_OPTIONS } from '../models';
 
 const { keys } = Object
 export default class Footer extends Component {
   static propTypes = {
-    completedCount: PropTypes.number.isRequired,
-    activeCount: PropTypes.number.isRequired,
-    filter: PropTypes.string.isRequired,
-    onClearCompleted: PropTypes.func.isRequired
+    model: PropTypes.shape({
+      state: PropTypes.instanceOf(TodoMVC)
+    })
   }
 
   renderTodoCount() {
-    const { activeCount } = this.props
-    const itemWord = activeCount === 1 ? 'item' : 'items'
+    let { remainingCount } = this.props.model.state;
+    const itemWord = remainingCount === 1 ? 'item' : 'items'
 
     return (
       <span className="todo-count">
-        <strong>{activeCount || 'No'}</strong> {itemWord} left
+        <strong>{remainingCount || 'No'}</strong> {itemWord} left
       </span>
     )
   }
 
   renderFilterLink(filter) {
-    const title = this.props.FILTER_OPTIONS[filter]
-    const { filter: selectedFilter } = this.props
+    const title = FILTER_OPTIONS[filter];
+    let { model } = this.props;
 
     return (
-      <Link
-        className={classnames({ selected: filter === selectedFilter })}
+      <button
+        className={classnames({ selected: filter === model.filter.state })}
         style={{ cursor: 'pointer' }}
-        to={filter === '' ? '/' : `/?filter=${filter}`}
+        onClick={() => model.filter.set(filter) }
       >
         {title}
-      </Link>
+      </button>
     )
   }
 
@@ -50,7 +49,7 @@ export default class Footer extends Component {
   }
 
   render() {
-    let filters = keys(this.props.FILTER_OPTIONS)
+    let filters = keys(FILTER_OPTIONS)
     return (
       <footer className="footer">
         {this.renderTodoCount()}

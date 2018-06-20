@@ -1,47 +1,47 @@
-import React from 'react'
-import { arrayOf, shape, bool, func } from 'prop-types'
-import classnames from 'classnames'
-import TodoTextInput from './TodoTextInput'
-import TodoItem from './TodoItem'
+import classnames from "classnames";
+import { map } from "microstates";
+import PropTypes from "prop-types";
+import React from "react";
+import TodoMVC from "../models";
+import TodoItem from "./TodoItem";
+import TodoTextInput from "./TodoTextInput";
 
-export default function TodoList({ todos, actions, editText }) {
+export default function TodoList({ model }) {
   return (
     <ul className="todo-list">
-      {todos &&
-        todos.map(todo => (
+      {map(
+        todo => (
           <li
             className={classnames({
-              completed: todo.completed,
-              editing: todo.editing
+              completed: todo.state.completed,
+              editing: todo.state.editing
             })}
-            key={todo.id}
+            key={todo.state.id}
           >
-            {todo.editing ? (
+            {todo.state.editing ? (
               <TodoTextInput
-                text={editText}
+                text={todo.state.text}
                 classes="edit"
-                onSave={actions.finishEditing}
-                onChange={text => actions.editText.set(text)}
-                onBlur={actions.finishEditing}
+                onSave={todo.save}
+                onChange={todo.text.set}
+                onBlur={todo.save}
               />
             ) : (
-              <TodoItem todo={todo} actions={actions} />
+              <TodoItem
+                todo={todo}
+                onDelete={() => model.todos.filter(state => todo.state !== state)}
+              />
             )}
           </li>
-        ))}
+        ),
+        model.todos
+      )}
     </ul>
-  )
+  );
 }
 
 TodoList.propTypes = {
-  todos: arrayOf(
-    shape({
-      editing: bool.isRequired,
-      completed: bool.isRequired
-    })
-  ),
-  actions: shape({
-    finishEditing: func.isRequired,
-    startEditing: func.isRequired
+  model: PropTypes.shape({
+    state: PropTypes.instanceOf(TodoMVC)
   })
-}
+};

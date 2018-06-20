@@ -1,26 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import { Todo } from '../models';
 
-export default function TodoItem({ todo, actions }) {
+export default function TodoItem({ todo, onDelete }) {
   return (
     <div className="view">
       <input
         className="toggle"
         type="checkbox"
-        checked={todo.completed}
-        onChange={() => actions.toggleTodo(todo)}
+        checked={todo.state.completed}
+        onChange={todo.completed.toggle}
       />
-      <label onDoubleClick={() => actions.startEditing(todo)}>{todo.text}</label>
-      <button className="destroy" onClick={() => actions.deleteTodo(todo)} />
+      <label onDoubleClick={todo.edit}>{todo.text.state}</label>
+      <button className="destroy" onClick={onDelete} />
     </div>
-  )
+  );
 }
 
 TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
-  actions: PropTypes.shape({
-    toggleTodo: PropTypes.func.isRequired,
-    startEditing: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired
+  todo: PropTypes.shape({
+    state: PropTypes.instanceOf(Todo)
   })
-}
+};
