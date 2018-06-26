@@ -16,11 +16,11 @@ export default function TodoList({ model }) {
               completed: todo.state.completed,
               editing: todo.state.editing
             })}
-            key={todo.state.id}
+            key={todo.id.state}
           >
             {todo.state.editing ? (
               <TodoTextInput
-                text={todo.state.text}
+                text={todo.text.state}
                 classes="edit"
                 onSave={todo.save}
                 onChange={todo.text.set}
@@ -29,12 +29,12 @@ export default function TodoList({ model }) {
             ) : (
               <TodoItem
                 todo={todo}
-                onDelete={() => model.todos.filter(state => todo.state !== state)}
+                onDelete={() => model.todos.filter(({ state }) => todo.state !== state)}
               />
             )}
           </li>
         ),
-        model.todos
+        model.filteredTodos
       )}
     </ul>
   );

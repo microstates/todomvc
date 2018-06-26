@@ -7,18 +7,18 @@ import TodoMVC from "../models";
 export default function MainSection({ model }) {
   return (
     <section className="main">
-      {model.state.hasTodos ? (
+      {model.hasTodos.state ? (
         <span>
           <input
             className="toggle-all"
             type="checkbox"
-            checked={model.state.isAllComplete}
+            checked={model.isAllComplete.state}
           />
           <label onClick={model.toggleAll} />
         </span>
       ) : null}
       <TodoList model={model} />
-      {model.state.hasTodos ? (
+      {model.hasTodos.state ? (
         <Footer model={model} />
       ) : null}
     </section>

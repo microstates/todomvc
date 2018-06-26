@@ -7,8 +7,8 @@
   "jsnext:main": "build/todomvc.es.js",
   "files": ["build"],
   "scripts": {
+    "start": "npm test -- --watch",
     "test": "mocha --require babel-core/register tests.js",
-    "test:watch": "npm test -- --watch",
     "build": "mkdirp build && npm run build:es && npm run build:cjs && npm run build:umd",
     "build:es":
       "babel index.js --no-babelrc --plugins=transform-class-properties,transform-object-rest-spread --out-file build/todomvc.es.js",
@@ -27,10 +27,8 @@
     "url": "https://github.com/microstates/todomvc/issues"
   },
   "homepage": "https://github.com/microstates/todomvc#readme",
-  "dependencies": {
-    "microstates": "github:cowboyd/microstates.js#tmp-all-in"
-  },
   "devDependencies": {
+    "microstates": "github:microstates/microstates.js#tm/all-in",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-plugin-external-helpers": "6.22.0",
@@ -48,6 +46,7 @@
     "rollup-plugin-babel": "3.0.3",
     "rollup-plugin-node-resolve": "3.0.0",
     "rollup-plugin-replace": "2.0.0",
-    "rollup-plugin-uglify": "2.0.1"
+    "rollup-plugin-uglify": "2.0.1",
+    "memoize-getters": "1.1.0"
   }
 }

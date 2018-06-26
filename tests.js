@@ -1,9 +1,9 @@
 import chai from 'chai'
 import mocha from 'mocha'
+import { create } from 'microstates';
 
 import TodoMVC, { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from './index'
 // Fix: why do I need to do this?
-const microstate = require('microstates').default
 
 const { freeze } = Object
 const { expect } = chai
@@ -15,12 +15,12 @@ let todoThree = freeze({ id: 3, text: 'Release microstates', completed: false })
 let value = freeze({
   todos: freeze([todoOne, todoTwo, todoThree])
 })
-let empty = microstate(TodoMVC)
-let filled = microstate(TodoMVC, value)
-let someCompleted = microstate(TodoMVC, {
+let empty = create(TodoMVC, {})
+let filled = create(TodoMVC, value)
+let someCompleted = create(TodoMVC, {
   todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree]
 })
-let allCompleted = microstate(TodoMVC, {
+let allCompleted = create(TodoMVC, {
   todos: [
     freeze({ id: 1, text: 'Make initial commit', completed: true }),
     freeze({ id: 2, text: 'Write readme', completed: true }),
@@ -68,7 +68,7 @@ describe('TodoMVC', function() {
         expect(filled.state.filteredTodos).to.deep.equal([todoOne, todoTwo, todoThree])
       })
       it('has only completed when filter is SHOW_COMPLETED', function() {
-        let ms = microstate(TodoMVC, {
+        let ms = create(TodoMVC, {
           filter: SHOW_COMPLETED,
           todos
         })
@@ -77,7 +77,7 @@ describe('TodoMVC', function() {
         ])
       })
       it('has only active when filter is SHOW_ACTIVE', function() {
-        let ms = microstate(TodoMVC, {
+        let ms = create(TodoMVC, {
           filter: SHOW_ACTIVE,
           todos
         })
@@ -174,7 +174,7 @@ describe('TodoMVC', function() {
       })
     })
     it('adds todo with addTodo', function() {
-      let { todos } = microstate(TodoMVC, value)
+      let { todos } = create(TodoMVC, value)
         .addTodo('Write tests')
         .valueOf()
       expect(todos).to.deep.equal([
@@ -185,7 +185,7 @@ describe('TodoMVC', function() {
       ])
     })
     it('clears completed with clearCompleted', function() {
-      let { todos } = microstate(TodoMVC, {
+      let { todos } = create(TodoMVC, {
         todos: [todoOne, freeze({ id: 2, text: 'Write readme', completed: true }), todoThree]
       })
         .clearCompleted()

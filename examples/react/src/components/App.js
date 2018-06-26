@@ -4,9 +4,9 @@ import TodoMVC from "../models";
 import Header from './Header';
 import MainSection from './MainSection';
 
-export default function App({ value }) {
+export default function App({ value, onChange }) {
   return (
-    <State type={TodoMVC} value={value}>
+    <State type={TodoMVC} value={value} onChange={onChange}>
       {model => (
         <div>
           <Header model={model} />

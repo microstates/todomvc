@@ -12,12 +12,12 @@ export default class Footer extends Component {
   }
 
   renderTodoCount() {
-    let { remainingCount } = this.props.model.state;
-    const itemWord = remainingCount === 1 ? 'item' : 'items'
+    let { remainingCount } = this.props.model;
+    const itemWord = remainingCount.state === 1 ? 'item' : 'items'
 
     return (
       <span className="todo-count">
-        <strong>{remainingCount || 'No'}</strong> {itemWord} left
+        <strong>{remainingCount.state || 'No'}</strong> {itemWord} left
       </span>
     )
   }

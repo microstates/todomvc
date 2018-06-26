@@ -58,7 +58,7 @@ export default class TodoMVC {
    */
   get completedCount() {
     // in computed properties, `this` references state object which has composed state values on it.
-    return this.todos.filter(({ completed }) => completed).length;
+    return this.todos.filter(({ completed }) => completed.state).todos.length;
   }
 
   /**
@@ -66,7 +66,7 @@ export default class TodoMVC {
    * @type Number
    */
   get nextId() {
-    return this.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0) + 1;
+    return this.todos.reduce((max, todo) => max.set(Math.max(todo.id.state, max.state)), 0).todos.state + 1;
   }
 
   /**
@@ -74,7 +74,7 @@ export default class TodoMVC {
    * @type Number
    */
   get remainingCount() {
-    return this.todos.length - this.completedCount;
+    return this.todos.length - this.completedCount.state;
   }
 
   /**
@@ -82,7 +82,7 @@ export default class TodoMVC {
    * @type Boolean
    */
   get isAllComplete() {
-    return this.todos.length > 0 && this.remainingCount === 0;
+    return this.todos.length > 0 && this.remainingCount.state === 0;
   }
 
   /**
@@ -90,11 +90,11 @@ export default class TodoMVC {
    * @type Array
    */
   get filteredTodos() {
-    switch (this.filter) {
+    switch (this.filter.state) {
       case SHOW_COMPLETED:
-        return this.todos.filter(({ completed }) => completed);
+        return this.todos.filter(({ completed }) => completed.state).todos;
       case SHOW_ACTIVE:
-        return this.todos.filter(({ completed }) => !completed);
+        return this.todos.filter(({ completed }) => !completed.state).todos;
       case SHOW_ALL:
       default:
         return this.todos;
@@ -114,14 +114,13 @@ export default class TodoMVC {
    * input of next todo item.
    */
   insertNewTodo() {
-    let { newTodo } = this.state;
-    if (newTodo.length === 0) {
+    if (this.newTodo.state.length === 0) {
       return this;
     } else {
       return this.todos
         .push({
-          text: this.state.newTodo,
-          id: this.state.nextId,
+          text: this.newTodo.state,
+          id: this.nextId.state,
           completed: false
         })
         .newTodo.set("");
@@ -132,7 +131,7 @@ export default class TodoMVC {
    * Remove all items that have completed status
    */
   clearCompleted() {
-    return this.todos.filter(({ completed }) => !completed);
+    return this.todos.filter(({ completed }) => !completed.state);
   }
 
   /**
