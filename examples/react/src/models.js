@@ -16,7 +16,7 @@ export class Todo {
   completed = Boolean;
 
   edit() {
-    return create(EditingTodo, this.valueOf());
+    return create(EditingTodo, this);
   }
 }
 
@@ -26,7 +26,7 @@ class EditingTodo extends Todo {
   }
 
   save() {
-    return create(Todo, this.valueOf());
+    return create(Todo, this);
   }
 }
 

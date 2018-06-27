@@ -38,10 +38,10 @@ export default class Footer extends Component {
   }
 
   renderClearButton() {
-    const { completedCount, onClearCompleted } = this.props
-    if (completedCount > 0) {
+    const { model: { completedCount, clearCompleted } } = this.props
+    if (completedCount.state > 0) {
       return (
-        <button className="clear-completed" onClick={onClearCompleted}>
+        <button className="clear-completed" onClick={clearCompleted}>
           Clear completed
         </button>
       )
