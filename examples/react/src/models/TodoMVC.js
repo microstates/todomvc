@@ -8,8 +8,8 @@ export const SHOW_ACTIVE = "show_active";
 
 export default class TodoMVC {
   todos   = create([Todo])  // Contains array of todo items
-  newTodo = create(String, ''); // Text value of the new todo input field
-  filter = create(String, '');  // The current filter applied to the todo items
+  newTodo = String
+  filter = String
 
   get nextId() {
     return reduce(this.todos, (acc, todo) => Math.max(todo.state.id, acc), 0) + 1;
@@ -53,7 +53,7 @@ export default class TodoMVC {
   }
 
   get filtered() {
-    switch (this.filter.state) {
+    switch (this.state.filter) {
       case SHOW_COMPLETED: return this.completed;
       case SHOW_ACTIVE: return this.active;
       case SHOW_ALL:
@@ -63,12 +63,12 @@ export default class TodoMVC {
   }
 
   insertNewTodo() {
-    if (this.state.newTodo.length === 0) {
+    if (this.newTodo.state.length === 0) {
       return this;
     } else {
       return this.todos
         .push({
-          text: this.state.newTodo,
+          text: this.newTodo.state,
           id: this.nextId,
           completed: false
         })

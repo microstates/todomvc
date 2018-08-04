@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 export default class TodoTextInput extends Component {
   static propTypes = {
     onSave: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onInputChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func,
     text: PropTypes.string,
     placeholder: PropTypes.string
@@ -17,7 +17,7 @@ export default class TodoTextInput extends Component {
   }
 
   handleChange = e => {
-    this.props.onChange(e.target.value)
+    this.props.onInputChange(e.target.value)
   }
 
   handleBlur = e => {

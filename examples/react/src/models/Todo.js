@@ -1,8 +1,14 @@
-import { create } from 'microstates';
-
 export default class Todo {
-  id = create(Number);
-  text = create(String, '');
-  completed = create(Boolean, false);
-  editing = create(Boolean, false);
+  id = Number
+  text = String
+  completed = Boolean
+  editing = Boolean
+
+  startEditing() {
+    return this.editing.set(true);
+  }
+
+  stopEditing() {
+    return this.editing.set(false);
+  }
 }

@@ -16,11 +16,11 @@ export default function App({ value, onChange }) {
           <header className="header">
             <h1>todos</h1>
             <TodoTextInput
-              text={app.state.newTodo}
+              text={app.newTodo.state}
               classes="new-todo"
-              onSave={() => app.insertNewTodo()}
-              onBlur={() => app.insertNewTodo()}
-              onChange={text => app.newTodo.set(text)}
+              onSave={app.insertNewTodo}
+              onBlur={app.insertNewTodo}
+              onInputChange={app.newTodo.set}
               placeholder="What needs to be done?"
             />
           </header>
@@ -32,36 +32,36 @@ export default function App({ value, onChange }) {
                   type="checkbox"
                   checked={app.isAllComplete}
                 />
-                <label onClick={() => app.toggleAll()} />
+                <label onClick={app.toggleAll} />
               </span>
             )}
             <ul className="todo-list">
               {map(app.filtered, todo => (
                 <li
                   className={classnames({
-                    completed: todo.state.completed,
-                    editing: todo.state.editing
+                    completed: todo.completed.state,
+                    editing: todo.editing.state
                   })}
-                  key={todo.state.id}
+                  key={todo.id.state}
                 >
-                  {todo.state.editing ? (
+                  {todo.editing.state ? (
                     <TodoTextInput
-                      text={todo.state.text}
+                      text={todo.text.state}
                       classes="edit"
-                      onSave={() => todo.editing.set(false)}
-                      onChange={text => todo.text.set(text)}
-                      onBlur={() => todo.editing.set(false)}
+                      onSave={todo.stopEditing}
+                      onBlur={todo.stopEditing}
+                      onInputChange={todo.text.set}
                     />
                   ) : (
                     <div className="view">
                       <input
                         className="toggle"
                         type="checkbox"
-                        checked={todo.state.completed}
-                        onChange={() => todo.completed.toggle()}
+                        checked={todo.completed.state}
+                        onChange={todo.completed.toggle}
                       />
-                      <label onDoubleClick={() => todo.editing.set(true)}>
-                        {todo.state.text}
+                      <label onDoubleClick={todo.startEditing}>
+                        {todo.text.state}
                       </label>
                       <button
                         className="destroy"
@@ -86,7 +86,7 @@ export default function App({ value, onChange }) {
                       <button
                         className={classnames({ selected: filter.selected })}
                         style={{ cursor: "pointer" }}
-                        onClick={() => filter.select()}
+                        onClick={filter.select}
                       >
                         {filter.label}
                       </button>
@@ -96,7 +96,7 @@ export default function App({ value, onChange }) {
                 {app.hasCompleted && (
                   <button
                     className="clear-completed"
-                    onClick={() => app.clearCompleted()}
+                    onClick={app.clearCompleted}
                   >
                     Clear completed
                   </button>
