@@ -2,13 +2,16 @@ export default class Todo {
   id = Number
   text = String
   completed = Boolean
+}
+
+export class EditableTodo extends Todo {
   editing = Boolean
 
-  startEditing() {
+  edit() {
     return this.editing.set(true);
   }
 
-  stopEditing() {
+  save() {
     return this.editing.set(false);
   }
 }

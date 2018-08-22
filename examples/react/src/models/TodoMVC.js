@@ -1,6 +1,6 @@
 import { create, reduce, filter } from "microstates";
 
-import Todo from './Todo';
+import { EditableTodo as Todo } from './Todo';
 
 export const SHOW_ALL = "";
 export const SHOW_COMPLETED = "show_completed";

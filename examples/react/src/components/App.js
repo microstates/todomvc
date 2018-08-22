@@ -28,11 +28,13 @@ export default function App({ value, onChange }) {
             {app.hasTodos && (
               <span>
                 <input
+                  id="toggle-all"
                   className="toggle-all"
                   type="checkbox"
                   checked={app.isAllComplete}
+                  onChange={app.toggleAll}
                 />
-                <label onClick={app.toggleAll} />
+                <label htmlFor="toggle-all" />
               </span>
             )}
             <ul className="todo-list">
@@ -48,8 +50,8 @@ export default function App({ value, onChange }) {
                     <TodoTextInput
                       text={todo.text.state}
                       classes="edit"
-                      onSave={todo.stopEditing}
-                      onBlur={todo.stopEditing}
+                      onSave={todo.save}
+                      onBlur={todo.save}
                       onInputChange={todo.text.set}
                     />
                   ) : (
@@ -60,9 +62,7 @@ export default function App({ value, onChange }) {
                         checked={todo.completed.state}
                         onChange={todo.completed.toggle}
                       />
-                      <label onDoubleClick={todo.startEditing}>
-                        {todo.text.state}
-                      </label>
+                      <label onDoubleClick={todo.edit}>{todo.text.state}</label>
                       <button
                         className="destroy"
                         onClick={() =>
