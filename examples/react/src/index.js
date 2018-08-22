@@ -12,9 +12,4 @@ let initial = restore() || {
   todos: [{ id: 0, text: 'Write Microstates Docs', completed: false }]
 };
 
-if (process.env.NODE_ENV !== 'production') {
-  const {whyDidYouUpdate} = require('why-did-you-update');
-  whyDidYouUpdate(React);
-}
-
 render(<App value={initial} onChange={save} />, document.getElementById('root'))
