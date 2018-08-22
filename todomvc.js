@@ -1,13 +1,29 @@
 import { create, reduce, filter } from "microstates";
 
-import { EditableTodo as Todo } from './Todo';
-
 export const SHOW_ALL = "";
 export const SHOW_COMPLETED = "show_completed";
 export const SHOW_ACTIVE = "show_active";
 
+export class Todo {
+  id = Number
+  text = String
+  completed = Boolean
+}
+
+export class EditableTodo extends Todo {
+  editing = Boolean
+
+  edit() {
+    return this.editing.set(true);
+  }
+
+  save() {
+    return this.editing.set(false);
+  }
+}
+
 export default class TodoMVC {
-  todos   = create([Todo])  // Contains array of todo items
+  todos   = create([EditableTodo])  // Contains array of todo items
   newTodo = String
   filter = String
 

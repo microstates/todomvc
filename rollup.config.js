@@ -1,46 +1,67 @@
-import nodeResolve from 'rollup-plugin-node-resolve'
-import replace from 'rollup-plugin-replace'
-import babel from 'rollup-plugin-babel'
+const pkg = require("./package.json");
+const babel = require("rollup-plugin-babel");
+const filesize = require("rollup-plugin-filesize");
+const resolve = require("rollup-plugin-node-resolve");
 
-const env = process.env.NODE_ENV
-const config = {
-  input: 'build/todomvc.es.js',
-  plugins: [],
-  external: ['microstates'],
-  output: {
-    name: 'TodoMVCModel',
-    exports: 'named',
-    globals: {
-      microstates: 'MS'
-    }
+const input = 'todomvc.js';
+
+const external = [
+  "microstates"
+];
+
+const fileSize = filesize();
+
+module.exports = [
+  {
+    input,
+    external,
+    output: {
+      file: pkg.main,
+      format: "cjs",
+      sourcemap: true
+    },
+    plugins: [
+      resolve(),
+      babel({
+        babelrc: false,
+        comments: false,
+        plugins: ["@babel/plugin-proposal-class-properties"],
+        presets: [
+          [
+            "@babel/preset-env",
+            {
+              targets: {
+                node: "6"
+              },
+              modules: false
+            }
+          ]
+        ]
+      }),
+      fileSize
+    ]
+  },
+  {
+    input,
+    external,
+    output: { file: pkg.module, format: "es", sourcemap: true },
+    plugins: [
+      resolve(),
+      babel({
+        babelrc: false,
+        comments: false,
+        plugins: ["@babel/plugin-proposal-class-properties"],
+        presets: [
+          [
+            "@babel/preset-env",
+            {
+              modules: false
+            }
+          ]
+        ],
+        externalHelpers: true
+      }),
+      fileSize
+    ]
   }
-}
-
-if (env === 'es' || env === 'cjs') {
-  config.output.format = env
-  config.plugins.push(
-    babel({
-      babelrc: false,
-      plugins: ['external-helpers']
-    })
-  )
-}
-
-if (env === 'umd') {
-  config.output.format = 'umd'
-  config.plugins.push(
-    nodeResolve({
-      jsnext: true
-    }),
-    babel({
-      babelrc: false,
-      exclude: 'node_modules/**',
-      plugins: ['external-helpers']
-    }),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(env)
-    })
-  )
-}
-
-export default config
+];
