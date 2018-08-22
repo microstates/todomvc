@@ -1,53 +1,52 @@
 {
   "name": "microstates-todomvc",
   "version": "1.0.0-beta.18",
-  "description": "Microstates Model for TodoMVC Component",
+  "description": "Microstate for TodoMVC Components",
   "main": "build/todomvc.cjs.js",
   "module": "build/todomvc.es.js",
-  "jsnext:main": "build/todomvc.es.js",
-  "files": ["build"],
+  "files": [
+    "build",
+    "src",
+    "README.md"
+  ],
   "scripts": {
-    "test": "mocha --require babel-core/register tests.js",
-    "test:watch": "npm test -- --watch",
-    "build": "mkdirp build && npm run build:es && npm run build:cjs && npm run build:umd",
-    "build:es":
-      "babel index.js --no-babelrc --plugins=transform-class-properties,transform-object-rest-spread --out-file build/todomvc.es.js",
-    "build:cjs": "cross-env NODE_ENV=cjs rollup -c -o build/todomvc.cjs.js",
-    "build:umd": "cross-env NODE_ENV=umd rollup -c -o build/todomvc.js",
-    "prepublish": "npm run test && npm run build"
+    "coverage": "jest --coverage",
+    "start": "npm run test -- --watch",
+    "test": "jest",
+    "build": "rollup -c",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microstates/todomvc.git"
   },
-  "keywords": ["microstates", "todomvc"],
-  "author": "Taras Mankovski <taras@thisdot.co>",
+  "keywords": [
+    "microstates",
+    "todomvc"
+  ],
+  "author": "Taras Mankovski <taras@frontside.io>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/microstates/todomvc/issues"
   },
   "homepage": "https://github.com/microstates/todomvc#readme",
-  "dependencies": {
-    "microstates": "github:cowboyd/microstates.js#tmp-all-in"
-  },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-core": "6.26.0",
-    "babel-plugin-external-helpers": "6.22.0",
-    "babel-plugin-syntax-class-properties": "6.13.0",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-plugin-transform-object-rest-spread": "6.26.0",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-preset-env": "1.6.1",
-    "babel-preset-es2015-rollup": "3.0.0",
-    "chai": "4.1.2",
-    "cross-env": "5.1.1",
-    "mkdirp": "0.5.1",
-    "mocha": "4.0.1",
-    "rollup": "0.53.3",
-    "rollup-plugin-babel": "3.0.3",
-    "rollup-plugin-node-resolve": "3.0.0",
-    "rollup-plugin-replace": "2.0.0",
-    "rollup-plugin-uglify": "2.0.1"
+    "@babel/core": "7.0.0-rc.2",
+    "@babel/plugin-proposal-class-properties": "7.0.0-rc.2",
+    "@babel/preset-env": "^7.0.0-rc.2",
+    "@babel/register": "^7.0.0-rc.2",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "23.4.2",
+    "rollup": "^0.64.1",
+    "rollup-plugin-babel": "4.0.0-beta.7",
+    "rollup-plugin-filesize": "4.0.1",
+    "rollup-plugin-node-resolve": "3.3.0",
+    "microstates": "0.10.1"
+  },
+  "peerDependencies": {
+    "microstates": "^0.9.6 || ^0.10.0"
+  },
+  "jest": {
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.jsx?$"
   }
 }

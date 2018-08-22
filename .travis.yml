@@ -1,3 +1,20 @@
 language: node_js
 node_js:
-  - "8"
+- "8"
+- node
+
+install:
+  - npm install -g npm@latest
+  - npm install -g coveralls
+  - npm install
+
+script:
+  - npm test
+
+sudo: false
+
+jobs:
+  include:
+    - stage: Produce Coverage
+      node_js: node
+      script: npm run coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
