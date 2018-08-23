@@ -31,3 +31,4 @@ Microstates was created to normalize how state transitions are performed across 
 the model provides all state and actions necessary to track state of the component. Framework specific state
 management is only necessary when storing local component state that is disposable. For example, and input field
 might store the current user input locally to prevent the model from being transitioned on every keystroke.
+
