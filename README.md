@@ -9,7 +9,7 @@ This package provides a Microstate model for state of a TodoMVC component. It in
 * [TodoMVC Microstate](todomvc.js)
 * [TodoMVC App in React](sandboxes/react/App.js) - [create a sandbox](https://codesandbox.io/s/github/microstates/todomvc/tree/master/sandboxes/react)
 
-Learn more about Microstates.js at [microstates/microstates.js](http://github.com/microstates/todomvc).
+Learn more about Microstates.js at [microstates/microstates.js](http://github.com/microstates/microstates.js).
 
 ## Installation
 
