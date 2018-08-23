@@ -1,0 +1,25 @@
+{
+  "name": "microstates-todomvc-react",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "index.js",
+  "dependencies": {
+    "@microstates/react": "0.9.0",
+    "@microstates/todomvc": "1.0.0-beta.0",
+    "classnames": "latest",
+    "microstates": "0.10.1",
+    "prop-types": "15.6.2",
+    "react": "16.4.2",
+    "react-dom": "16.4.2",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
