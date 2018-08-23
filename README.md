@@ -1,33 +1,37 @@
-# TodoMVC Model
+[![Build Status](https://travis-ci.com/microstates/todomvc.svg?branch=master)](https://travis-ci.com/microstates/todomvc) [![Coverage Status](https://coveralls.io/repos/github/microstates/todomvc/badge.svg?branch=tm%2Fupgrade-microstates)](https://coveralls.io/github/microstates/todomvc?branch=tm%2Fupgrade-microstates)
 
-This package provides a model for TodoMVC App Components. The goal of this package is to show how
-a single state model can be consumed by different frameworks without modifying original model.
+# TodoMVC Microstate
 
-## How it works?
+This package provides a Microstate model for state of a TodoMVC component. It includes tests and is published as `@microstates/todomvc` package. The purpose of this package is to show how a Microstate can be distributed via NPM. The state can be consumed by projects in different frameworks.
 
-For each framework, a _connect_ utility wraps a component and binds the TodoMVC Model to the root component.
-The connect utility makes `model` and `actions` available to the wrapped component. `model` contains state
-for the current value. `actions` are state transitions wrapped in framework specific code that'll cause the
-component to update.
+Learn more about Microstates.js at [microstates/microstates.js](http://github.com/microstates/todomvc).
 
-## Where to look
+## Installation
 
-* [TodoMVC Model](index.js)
-* React
-  * [Component](examples/react/src/components/App.js)
-  * [Connect Helper](examples/react/src/utils/connect.js)
-* Skate.js
-  * [Component](examples/skatejs/src/todo-mvc/component.js)
-  * [Connect Helper](examples/skatejs/src/util/with-microstate.js)
-* Vue.js
-  * [Component](examples/vue/src/components/Todos.vue)
-  * [Connect Helper](examples/vue/src/utils/connect.js)
+`npm install --save @microstates/todomvc`
 
-## Notable
+or
 
-### No framework specifc state management
+`yarn add @microstates/todomvc`
 
-Microstates was created to normalize how state transitions are performed across frameworks. For most cases,
-the model provides all state and actions necessary to track state of the component. Framework specific state
-management is only necessary when storing local component state that is disposable. For example, and input field
-might store the current user input locally to prevent the model from being transitioned on every keystroke.
+## Getting Started
+
+To use this model, you can import it and create a Microstate.
+
+```js
+import { create } from 'microstates'
+import TodoMVC from '@microstate/todomvc'
+
+let todomvc = create(TodoMVC)
+```
+
+## Tests
+
+The Microstate comes with [tests](tests/todomvc-test.js) with 100% coverage.
+
+```js
+git clone git@github.com:microstates/todomvc.git
+cd todomvc
+npm install
+npm test
+```
