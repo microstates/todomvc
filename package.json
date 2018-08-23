@@ -4,6 +4,7 @@
   "description": "Microstate for TodoMVC Components",
   "main": "build/todomvc.cjs.js",
   "module": "build/todomvc.es.js",
+  "private": false,
   "files": [
     "build",
     "src",
