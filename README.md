@@ -4,6 +4,11 @@
 
 This package provides a Microstate model for state of a TodoMVC component. It includes tests and is published as `@microstates/todomvc` package. The purpose of this package is to show how a Microstate can be distributed via NPM. The state can be consumed by projects in different frameworks.
 
+## Links
+
+* [TodoMVC Microstate](todomvc.js)
+* [Create a sandbox with TodoMVC App in React](https://codesandbox.io/s/github/microstates/todomvc/tree/master/sandboxes/react)
+
 Learn more about Microstates.js at [microstates/microstates.js](http://github.com/microstates/todomvc).
 
 ## Installation
