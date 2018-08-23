@@ -41,7 +41,8 @@
     "rollup-plugin-babel": "4.0.0-beta.7",
     "rollup-plugin-filesize": "4.0.1",
     "rollup-plugin-node-resolve": "3.3.0",
-    "microstates": "0.10.1"
+    "microstates": "0.10.1",
+    "jest": "23.5.0"
   },
   "peerDependencies": {
     "microstates": "^0.9.6 || ^0.10.0"
