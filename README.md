@@ -7,7 +7,8 @@ This package provides a Microstate model for state of a TodoMVC component. It in
 ## Links
 
 * [TodoMVC Microstate](todomvc.js)
-* [TodoMVC App in React](sandboxes/react/App.js) - [create a sandbox](https://codesandbox.io/s/github/microstates/todomvc/tree/master/sandboxes/react)
+* [TodoMVC App in React.js](sandboxes/react/App.js) - [create React sandbox](https://codesandbox.io/s/github/microstates/todomvc/tree/master/sandboxes/react)
+* [TodoMVC in Vue.js](sandboxes/vue/src/App.vue) - [create Vue sandbox](https://codesandbox.io/s/github/microstates/todomvc/tree/master/sandboxes/vue)
 
 Learn more about Microstates.js at [microstates/microstates.js](http://github.com/microstates/microstates.js).
 
