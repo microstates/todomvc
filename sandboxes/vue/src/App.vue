@@ -15,82 +15,81 @@ export default {
     },
   },
   render(h, { props: { app } }) {
-    console.log('rerendered component');
     return (
-      <div class="todoapp">
-        <header class="header">
+      <div class='todoapp'>
+        <header class='header'>
           <h1>todos</h1>
           <TodoTextInput
             text={app.newTodo.state}
-            classes="new-todo"
+            classes='new-todo'
             onSave={app.insertNewTodo}
             onBlur={app.insertNewTodo}
             onInputChange={app.newTodo.set}
-            placeholder="What needs to be done?"
+            placeholder='What needs to be done?'
           />
         </header>
-        <section className="main">
+        <section class='main'>
           {app.hasTodos && (
             <span>
               <input
-                id="toggle-all"
-                class="toggle-all"
-                type="checkbox"
+                id='toggle-all'
+                class='toggle-all'
+                type='checkbox'
                 checked={app.isAllComplete}
                 onChange={app.toggleAll}
               />
-              <label htmlFor="toggle-all" />
+              <label for='toggle-all' />
             </span>
           )}
-          <ul class="todo-list">
+          <ul class='todo-list'>
             {map(app.filtered, todo => (
               <li
                 class={classnames({
                   completed: todo.completed.state,
-                  editing: todo.editing.state
+                  editing: todo.editing.state,
                 })}
                 key={todo.id.state}
               >
                 {todo.editing.state ? (
                   <TodoTextInput
                     text={todo.text.state}
-                    classes="edit"
+                    classes='edit'
                     onSave={todo.save}
                     onBlur={todo.save}
                     onInputChange={todo.text.set}
                   />
                 ) : (
-                    <div className="view">
-                      <input
-                        class="toggle"
-                        type="checkbox"
-                        checked={todo.completed.state}
-                        onChange={todo.completed.toggle}
-                      />
-                      <label onDblclick={todo.edit}>{todo.text.state}</label>
-                      <button
-                        class="destroy"
-                        onClick={() =>
-                          app.todos.filter(item => todo.state !== item.state)
-                        }
-                      />
-                    </div>
-                  )}
+                  <div class='view'>
+                    <input
+                      class='toggle'
+                      type='checkbox'
+                      checked={todo.completed.state}
+                      onChange={todo.completed.toggle}
+                    />
+                    <label onDblclick={todo.edit}>{todo.text.state}</label>
+                    <button
+                      class='destroy'
+                      onClick={() =>
+                        app.todos.filter(item => todo.state !== item.state)
+                      }
+                    />
+                  </div>
+                )}
               </li>
             ))}
           </ul>
           {app.hasTodos && (
-            <footer class="footer">
-              <span class="todo-count">
-                <strong>{app.active.length || "No"}</strong>{" "}
-                {pluralize("item", app.active.length)}
+            <footer class='footer'>
+              <span class='todo-count'>
+                <strong>{app.active.length || 'No'}</strong>{' '}
+                {pluralize('item', app.active.length)}
               </span>
-              <ul class="filters">
+              <ul class='filters'>
                 {app.filters.map(filter => (
                   <li key={filter.key}>
                     <button
                       class={classnames({ selected: filter.selected })}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: 'pointer' }}
                       onClick={filter.select}
                     >
                       {filter.label}
@@ -100,7 +99,7 @@ export default {
               </ul>
               {app.hasCompleted && (
                 <button
-                  class="clear-completed"
+                  class='clear-completed'
                   onClick={app.clearCompleted}
                 >
                   Clear completed
@@ -115,4 +114,4 @@ export default {
 };
 </script>
 
-<style src="./styles.css"></style>
+<style src='./styles.css'></style>
