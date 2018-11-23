@@ -23,7 +23,7 @@ export class EditableTodo extends Todo {
 }
 
 export default class TodoMVC {
-  todos   = create([EditableTodo])  // Contains array of todo items
+  todos   = [EditableTodo]  // Contains array of todo items
   newTodo = String
   filter = String
 
