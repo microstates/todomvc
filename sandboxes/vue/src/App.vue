@@ -1,5 +1,4 @@
 <script>
-import { map } from 'microstates';
 import TodoMVC from '@microstates/todomvc';
 import classnames from 'classnames';
 import TodoTextInput from './TodoTextInput';
@@ -42,7 +41,7 @@ export default {
             </span>
           )}
           <ul class='todo-list'>
-            {map(app.filtered, todo => (
+            {[...app.filtered].map(todo => (
               <li
                 class={classnames({
                   completed: todo.completed.state,
