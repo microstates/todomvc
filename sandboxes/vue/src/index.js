@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import TodoMVC from '@microstates/todomvc';
-import { create, Store } from 'microstates';
+import { create, Store, valueOf } from 'microstates';
 
 import Vue from 'vue';
 import App from './App';
@@ -31,7 +31,7 @@ new Vue({
     this.app = Store(create(TodoMVC, initial), (app) => {
       this.app = app;
       this.key = this.key + 1;
-      save(app.state);
+      save(valueOf(app));
     });
   },
   template: '<App :app="app" :key="key"/>',

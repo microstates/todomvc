@@ -23,20 +23,20 @@ export class EditableTodo extends Todo {
 }
 
 export default class TodoMVC {
-  todos   = create([EditableTodo])  // Contains array of todo items
+  todos   = [EditableTodo]  // Contains array of todo items
   newTodo = String
   filter = String
 
   get nextId() {
-    return reduce(this.todos, (acc, todo) => Math.max(todo.state.id, acc), 0) + 1;
+    return reduce(this.todos, (acc, todo) => Math.max(todo.id.state, acc), 0) + 1;
   }
 
   get completed() {
-    return filter(this.todos, todo => todo.state.completed);
+    return filter(this.todos, todo => todo.completed.state);
   }
 
   get active() {
-    return filter(this.todos, todo => !todo.state.completed);
+    return filter(this.todos, todo => !todo.completed.state);
   }
 
   get isAllComplete() {
@@ -44,7 +44,7 @@ export default class TodoMVC {
   }
 
   get hasTodos() {
-    return this.todos.state.length > 0;
+    return this.todos.length > 0;
   }
 
   get hasCompleted() {
@@ -52,12 +52,10 @@ export default class TodoMVC {
   }
 
   get filters() {
-    let { filter } = this.state;
-    
     let option = (key, label) => ({
       key,
       label,
-      selected: filter === key,
+      selected: this.filter.state === key,
       select: () => this.filter.set(key)
     });
 
@@ -69,7 +67,7 @@ export default class TodoMVC {
   }
 
   get filtered() {
-    switch (this.state.filter) {
+    switch (this.filter.state) {
       case SHOW_COMPLETED: return this.completed;
       case SHOW_ACTIVE: return this.active;
       case SHOW_ALL:
@@ -79,7 +77,7 @@ export default class TodoMVC {
   }
 
   insertNewTodo() {
-    if (this.newTodo.state.length === 0) {
+    if (this.newTodo.state === "") {
       return this;
     } else {
       return this.todos
