@@ -14,7 +14,7 @@ export default class App extends React.Component {
       this.setState({ $ });
       this.props.onChange(valueOf($));
     })
-  }
+  };
   render() {
     let { $ } = this.state;
     return (
@@ -71,9 +71,7 @@ export default class App extends React.Component {
                     <label onDoubleClick={todo.edit}>{todo.text.state}</label>
                     <button
                       className="destroy"
-                      onClick={() =>
-                        $.todos.filter(item => todo.state !== item.state)
-                      }
+                      onClick={() => $.todos.remove(todo)}
                     />
                   </div>
                 )}
@@ -100,10 +98,7 @@ export default class App extends React.Component {
                 ))}
               </ul>
               {$.hasCompleted && (
-                <button
-                  className="clear-completed"
-                  onClick={$.clearCompleted}
-                >
+                <button className="clear-completed" onClick={$.clearCompleted}>
                   Clear completed
                 </button>
               )}
@@ -111,6 +106,6 @@ export default class App extends React.Component {
           )}
         </section>
       </div>
-    )
+    );
   }
 }
