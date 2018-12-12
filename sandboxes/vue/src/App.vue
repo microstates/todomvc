@@ -69,7 +69,7 @@ export default {
                     <button
                       class='destroy'
                       onClick={() =>
-                        app.todos.filter(item => todo.state !== item.state)
+                        app.todos.remove(todo)
                       }
                     />
                   </div>
