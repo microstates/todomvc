@@ -1,6 +1,6 @@
 {
   "name": "@microstates/todomvc",
-  "version": "1.0.0-beta.0",
+  "version": "0.12.0",
   "description": "Microstate for TodoMVC Components",
   "main": "build/todomvc.cjs.js",
   "module": "build/todomvc.es.js",
