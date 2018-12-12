@@ -41,10 +41,10 @@
     "coveralls": "^3.0.2",
     "jest": "^23.6.0",
     "microstates": "0.12.3",
-    "rollup": "^0.66.4",
+    "rollup": "^0.67.4",
     "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-filesize": "^4.0.1",
-    "rollup-plugin-node-resolve": "^3.4.0"
+    "rollup-plugin-filesize": "^5.0.1",
+    "rollup-plugin-node-resolve": "^4.0.0"
   },
   "peerDependencies": {
     "microstates": "0.12.0"
