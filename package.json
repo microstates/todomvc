@@ -43,7 +43,7 @@
     "microstates": "0.12.4",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-filesize": "^5.0.1",
+    "rollup-plugin-filesize": "^6.0.0",
     "rollup-plugin-node-resolve": "^4.0.0"
   },
   "peerDependencies": {
