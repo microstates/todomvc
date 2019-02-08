@@ -12,8 +12,6 @@ const pluralize = (word, count) => (count === 1 ? word : `${word}s`);
 export default function App({ value, onChange }) {
   let $ = useType(TodoMVC, value);
 
-  console.log(valueOf($));
-
   useEffect(() => onChange(valueOf($)), [valueOf($)]);
 
   return (
