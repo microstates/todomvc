@@ -16,6 +16,6 @@ describe('store', () => {
   });
 
   it('has an Identity on store.newTodo', () => {
-    expect(store.newTodo.constructor.name).toBe("Id<String>")
+    expect(store.newTodo.constructor.name).toBe("Ref<String>")
   });
 });
