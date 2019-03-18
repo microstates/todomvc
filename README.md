@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.com/microstates/todomvc.svg?branch=master)](https://travis-ci.com/microstates/todomvc) [![Coverage Status](https://coveralls.io/repos/github/microstates/todomvc/badge.svg?branch=tm%2Fupgrade-microstates)](https://coveralls.io/github/microstates/todomvc?branch=tm%2Fupgrade-microstates) [![Greenkeeper badge](https://badges.greenkeeper.io/microstates/todomvc.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/microstates/todomvc.svg?branch=master)](https://travis-ci.com/microstates/todomvc) [![Coverage Status](https://coveralls.io/repos/github/microstates/todomvc/badge.svg?branch=tm%2Fupgrade-microstates)](https://coveralls.io/github/microstates/todomvc?branch=tm%2Fupgrade-microstates) [![Greenkeeper badge](https://badges.greenkeeper.io/microstates/todomvc.svg)](https://greenkeeper.io/) [![Chat on Discord](https://img.shields.io/discord/556202291586269214.svg)](http://bit.ly/microstates-discord)
+
 
 # TodoMVC Microstate
 
