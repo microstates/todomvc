@@ -33,7 +33,7 @@
   "homepage": "https://github.com/microstates/todomvc#readme",
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
     "babel-core": "7.0.0-bridge.0",
