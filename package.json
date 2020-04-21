@@ -38,7 +38,7 @@
     "@babel/register": "^7.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.12",
     "jest": "^23.6.0",
     "microstates": "0.14.0",
     "rollup": "^2.0.0",
