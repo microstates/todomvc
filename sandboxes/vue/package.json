@@ -36,7 +36,7 @@
     "copy-webpack-plugin": "^5.0.0",
     "css-loader": "^3.0.0",
     "eslint": "^5.10.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-import-resolver-webpack": "^0.11.0",
     "eslint-loader": "^2.1.1",
