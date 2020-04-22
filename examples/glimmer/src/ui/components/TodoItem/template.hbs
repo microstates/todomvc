@@ -1,0 +1,11 @@
+<li class="{{if @todo.completed 'completed'}} {{if @todo.editing 'editing'}}">
+  <div class="view">
+    <input class="toggle" type="checkbox" checked={{if @todo.completed 'checked'}} onchange={{curry @onToggle @todo}}>
+
+    <label ondblclick={{curry @startEdit @todo}}>{{@todo.text}}</label>
+
+    <button class="destroy" onclick={{curry @onRemove @todo}}></button>
+  </div>
+
+  <input type="text" class="edit" value={{@editText}} onkeyup={{action handleEditTextUpdate}} onblur={{@abandonEdit}}>
+</li>
